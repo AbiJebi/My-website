@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0f172a;
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            background: #020617;
+        }
+
+        nav h2 {
+            color: #38bdf8;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a,
+                #0f172a
+            );
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #38bdf8;
+            color: #020617;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #7dd3fc;
+            transform: scale(1.05);
+        }
+
+        /* About */
+        .about {
+            padding: 80px 10%;
+            text-align: center;
+            background: #111827;
+        }
+
+        .about h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .about p {
+            max-width: 700px;
+            margin: auto;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .services {
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .services h2 {
+            color: #38bdf8;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 250px;
+            padding: 30px;
+            background: #1e293b;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: #334155;
+        }
+
+        .card h3 {
+            color: #38bdf8;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #020617;
+            color: #94a3b8;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <h2>MY WEBSITE</h2>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Welcome to <span>My Website</span>
+            </h1>
+
+            <p>
+                Hello! This is my first website.
+                I am learning how to create websites
+                and host them on the Internet.
+            </p>
+
+            <a href="#about" class="btn">
+                Explore More
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about" id="about">
+
+        <h2>About Me</h2>
+
+        <p>
+            Welcome to my website.
+            Here you can add your personal information,
+            business details, portfolio, or anything
+            you want people to know about you.
+        </p>
+
+    </section>
+
+
+    <!-- Services -->
+    <section class="services" id="services">
+
+        <h2>My Services</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Service 1</h3>
+                <p>
+                    Add your first service or activity here.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Service 2</h3>
+                <p>
+                    Add your second service or activity here.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Service 3</h3>
+                <p>
+                    Add your third service or activity here.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        © 2026 My Website | All Rights Reserved
+    </footer>
+
+</body>
+</html>
