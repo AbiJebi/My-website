@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -10,696 +8,618 @@
 
 <title>JB World</title>
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <style>
 
-/* ================= GENERAL ================= */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
-    min-height: 100vh;
-    background: linear-gradient(
-        135deg,
-        #fff0f5,
-        #ffe4ec
-    );
-
-    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
 }
 
-
-/* ================= HEADER ================= */
+/* =========================
+   HEADER
+========================= */
 
 .header {
-
-    text-align: center;
-
-    padding: 35px 15px 25px;
-
-    background: linear-gradient(
-        135deg,
-        #ff4f81,
-        #ff8fab
-    );
-
+    background: #102a43;
     color: white;
-
-    position: relative;
-
-    overflow: hidden;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
 .header h1 {
-
-    font-size: 38px;
-
-    margin-bottom: 8px;
+    font-size: 28px;
+    margin-bottom: 7px;
 }
 
 .header p {
-
-    font-size: 18px;
+    color: #d9e2ec;
+    font-size: 14px;
 }
 
 
-/* Hearts */
-
-.heart {
-
-    position: absolute;
-
-    font-size: 70px;
-
-    opacity: 0.25;
-}
-
-.heart.left {
-
-    left: 8%;
-
-    top: 20px;
-}
-
-.heart.right {
-
-    right: 8%;
-
-    bottom: 10px;
-}
-
-
-/* ================= TABS ================= */
+/* =========================
+   TABS
+========================= */
 
 .tabs {
-
     display: flex;
-
-    justify-content: center;
-
     flex-wrap: wrap;
-
-    gap: 10px;
-
-    padding: 18px;
-
+    justify-content: center;
+    gap: 8px;
     background: white;
-
-    box-shadow:
-        0 3px 10px rgba(0,0,0,0.1);
+    padding: 12px;
+    border-bottom: 1px solid #d9e2ec;
 }
 
 .tab-button {
-
     border: none;
-
-    padding: 13px 20px;
-
-    border-radius: 25px;
-
-    background: #ffe1ea;
-
-    color: #d63364;
-
-    font-weight: bold;
-
-    font-size: 15px;
-
+    background: #e9eef3;
+    color: #243b53;
+    padding: 11px 17px;
+    border-radius: 7px;
     cursor: pointer;
-}
-
-.tab-button.active {
-
-    background: #ff4f81;
-
-    color: white;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .tab-button:hover {
+    background: #d9e2ec;
+}
 
-    background: #ff6f9a;
-
+.tab-button.active {
+    background: #102a43;
     color: white;
 }
 
 
-/* ================= CONTENT ================= */
+/* =========================
+   MAIN CONTAINER
+========================= */
 
 .container {
-
-    width: 95%;
-
     max-width: 1100px;
-
     margin: 25px auto;
+    padding: 0 15px;
 }
 
 .section-title {
-
-    text-align: center;
-
-    margin-bottom: 20px;
-
-    color: #d63364;
+    font-size: 24px;
+    color: #102a43;
+    margin-bottom: 18px;
 }
 
 
-/* ================= ADD BOX ================= */
+/* =========================
+   NORMAL ADD BOX
+========================= */
 
 .add-box {
-
     background: white;
-
     padding: 20px;
-
-    border-radius: 15px;
-
+    border-radius: 10px;
     margin-bottom: 20px;
-
-    box-shadow:
-        0 3px 12px rgba(0,0,0,0.08);
-}
-
-.add-box h3 {
-
-    margin-bottom: 15px;
-
-    color: #d63364;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .form-row {
-
     display: flex;
-
     gap: 10px;
-
     flex-wrap: wrap;
 }
 
-.form-row input {
-
-    flex: 1;
-
-    min-width: 180px;
-
+input,
+select {
     padding: 12px;
-
-    border: 1px solid #ddd;
-
-    border-radius: 8px;
-
+    border: 1px solid #bcccdc;
+    border-radius: 6px;
     font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2f6690;
+}
+
+.form-row input {
+    flex: 1;
+    min-width: 180px;
 }
 
 .add-btn {
-
-    padding: 12px 22px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #ff4f81;
-
+    background: #2f6690;
     color: white;
-
-    font-weight: bold;
-
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .add-btn:hover {
-
-    background: #d63364;
+    background: #245477;
 }
 
 
-/* ================= TABLE ================= */
+/* =========================
+   TABLE
+========================= */
 
 .table-container {
-
     background: white;
-
-    border-radius: 15px;
-
+    border-radius: 10px;
     overflow-x: auto;
-
-    box-shadow:
-        0 3px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 table {
-
     width: 100%;
-
     border-collapse: collapse;
-
-    min-width: 700px;
+    min-width: 650px;
 }
 
-thead {
-
-    background: #ff4f81;
-
+th {
+    background: #102a43;
     color: white;
-}
-
-th,
-td {
-
-    padding: 15px;
-
+    padding: 13px;
     text-align: center;
-
-    border-bottom: 1px solid #eee;
 }
 
-th:nth-child(2),
-td:nth-child(2) {
-
-    text-align: left;
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
 }
 
-th:nth-child(3),
-td:nth-child(3) {
-
-    text-align: left;
+tr:hover {
+    background: #f8fafc;
 }
 
 
-/* ================= CHECKBOX ================= */
+/* =========================
+   ACTION BUTTONS
+========================= */
 
-.status-checkbox {
-
-    width: 22px;
-
-    height: 22px;
-
+.edit-btn {
+    background: #486581;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
     cursor: pointer;
-
-    accent-color: #ff4f81;
+    margin-right: 5px;
 }
 
-
-/* ================= DELETE ================= */
+.edit-btn:hover {
+    background: #334e68;
+}
 
 .delete-btn {
-
+    background: #c0392b;
+    color: white;
     border: none;
-
-    background: #ffebef;
-
-    color: #e6395f;
-
-    padding: 7px 10px;
-
-    border-radius: 7px;
-
+    padding: 7px 12px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 .delete-btn:hover {
+    background: #a93226;
+}
 
-    background: #e6395f;
 
+/* =========================
+   STATUS
+========================= */
+
+.status-btn {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #d9e2ec;
+    color: #243b53;
+}
+
+
+/* =========================
+   EXPENSE PAGE
+========================= */
+
+.expense-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.month-box {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.07);
+}
+
+.month-box label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #486581;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 5px solid #2f6690;
+}
+
+.summary-card h4 {
+    color: #627d98;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.summary-card .amount {
+    font-size: 23px;
+    font-weight: bold;
+    color: #102a43;
+}
+
+.balance-card {
+    border-left-color: #486581;
+}
+
+
+/* =========================
+   BUDGET EDIT
+========================= */
+
+.budget-box {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.budget-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.budget-row input {
+    flex: 1;
+    min-width: 180px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 430px;
+    border-radius: 10px;
+    padding: 22px;
+}
+
+.modal-content h3 {
+    color: #102a43;
+    margin-bottom: 15px;
+}
+
+.modal-content input {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cancel-btn {
+    background: #d9e2ec;
+    color: #243b53;
+    border: none;
+    padding: 10px 17px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #2f6690;
     color: white;
+    border: none;
+    padding: 10px 17px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 
-/* ================= COMPLETED ================= */
+/* =========================
+   FOOTER
+========================= */
 
-.completed {
-
-    text-decoration: line-through;
-
-    opacity: 0.55;
-}
-
-
-/* ================= LOADING ================= */
-
-.loading {
-
+.footer {
     text-align: center;
-
-    padding: 30px;
-
-    color: #d63364;
-}
-
-
-/* ================= FOOTER ================= */
-
-footer {
-
-    text-align: center;
-
     padding: 25px;
-
-    margin-top: 40px;
-
-    background: #ff4f81;
-
-    color: white;
+    margin-top: 35px;
+    background: #102a43;
+    color: #d9e2ec;
+    font-size: 13px;
 }
 
 
-/* ================= MOBILE ================= */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .header h1 {
-
-        font-size: 30px;
+        font-size: 23px;
     }
 
-    .header p {
-
-        font-size: 16px;
+    .tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
     }
 
     .tab-button {
+        white-space: nowrap;
+    }
 
-        font-size: 13px;
-
-        padding: 10px 13px;
+    .summary-grid {
+        grid-template-columns: 1fr;
     }
 
     .container {
-
-        width: 96%;
+        margin-top: 18px;
     }
 
-    .form-row {
-
-        flex-direction: column;
+    .expense-top {
+        align-items: stretch;
     }
 
-    .form-row input,
-    .add-btn {
-
+    .month-box {
         width: 100%;
     }
+
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =========================
+     HEADER
+========================= -->
 
-<header class="header">
+<div class="header">
 
-    <div class="heart left">❤️</div>
+    <h1>JB World</h1>
 
-    <div class="heart right">❤️</div>
+    <p>Our Little Household Manager</p>
 
-    <h1>
-        ❤️ Welcome to JB World ❤️
-    </h1>
-
-    <p>
-        Our Little Household Manager
-    </p>
-
-</header>
+</div>
 
 
-<!-- ================= TABS ================= -->
+<!-- =========================
+     TABS
+========================= -->
 
 <div class="tabs">
 
-    <button
-        class="tab-button active"
-        onclick="showTab('tasks', this)">
-
-        📋 Today's Task
-
+    <button class="tab-button active"
+            onclick="showTab('tasks', this)">
+        Today's Task
     </button>
 
-
-    <button
-        class="tab-button"
-        onclick="showTab('groceries', this)">
-
-        🛒 Groceries
-
+    <button class="tab-button"
+            onclick="showTab('groceries', this)">
+        Groceries
     </button>
 
-
-    <button
-        class="tab-button"
-        onclick="showTab('vegetables', this)">
-
-        🥕 Vegetables
-
+    <button class="tab-button"
+            onclick="showTab('vegetables', this)">
+        Vegetables
     </button>
 
+    <button class="tab-button"
+            onclick="showTab('todo', this)">
+        To Do List
+    </button>
 
-    <button
-        class="tab-button"
-        onclick="showTab('todo', this)">
+    <button class="tab-button"
+            onclick="showTab('abi-expense', this)">
+        Abi Expense
+    </button>
 
-        ✅ To Do List
-
+    <button class="tab-button"
+            onclick="showTab('jebi-expense', this)">
+        JEBI Expense
     </button>
 
 </div>
 
 
-<!-- ================= MAIN ================= -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <div class="container">
 
+    <div id="app"></div>
 
-    <h2
-        class="section-title"
-        id="sectionTitle">
-
-        📋 Today's Task
-
-    </h2>
+</div>
 
 
-    <!-- ADD ITEM -->
+<div class="footer">
 
-    <div class="add-box">
+    JB World © 2026
 
-        <h3>
-            ➕ Add New Item
-        </h3>
+</div>
 
 
-        <div class="form-row">
 
+<!-- =========================
+     EXPENSE EDIT MODAL
+========================= -->
 
-            <input
-                type="text"
-                id="itemName"
-                placeholder="Name">
+<div class="modal" id="expenseModal">
 
+    <div class="modal-content">
 
-            <input
-                type="text"
-                id="itemDescription"
-                placeholder="Description">
+        <h3>Edit Expense</h3>
 
+        <input
+            type="text"
+            id="editExpenseItem"
+            placeholder="Items">
+
+        <input
+            type="number"
+            id="editExpenseCost"
+            placeholder="Cost"
+            min="0"
+            step="0.01">
+
+        <div class="modal-actions">
 
             <button
-                class="add-btn"
-                onclick="addItem()">
+                class="cancel-btn"
+                onclick="closeExpenseModal()">
+                Cancel
+            </button>
 
-                Add
-
+            <button
+                class="save-btn"
+                onclick="saveExpenseEdit()">
+                Save
             </button>
 
         </div>
 
     </div>
 
-
-    <!-- TABLE -->
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        S.No
-                    </th>
-
-                    <th>
-                        Name
-                    </th>
-
-                    <th>
-                        Description
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Action
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody
-                id="tableBody">
-
-                <tr>
-
-                    <td
-                        colspan="5"
-                        class="loading">
-
-                        Loading...
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
 </div>
 
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    ❤️ JB World — Our Home, Our Happiness ❤️
-
-</footer>
 
 
 <script>
 
 /* =====================================================
-   SUPABASE CONNECTION
-   ===================================================== */
-
-
-/*
-    YOUR SUPABASE PROJECT URL
-*/
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
     "https://zuokrmjppxnlcmumeamq.supabase.co";
 
-
-/*
-    PASTE YOUR SUPABASE PUBLISHABLE KEY HERE
-
-    Example:
-
-    const SUPABASE_KEY =
-        "sb_publishable_xxxxxxxxx";
-
-*/
-
-const SUPABASE_KEY =
+const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_pZJjNN3iLCqWTxunDCKsvQ_WEphdmiZ";
 
 
-/*
-    Create Supabase client
-*/
-
-const db =
-    window.supabase.createClient(
+const supabaseClient =
+    supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_PUBLISHABLE_KEY
     );
 
 
 /* =====================================================
    CURRENT TAB
-   ===================================================== */
+===================================================== */
 
 let currentTab = "tasks";
 
 
 /* =====================================================
-   TAB TITLES
-   ===================================================== */
+   NORMAL HOUSEHOLD DATA
+===================================================== */
 
-const tabTitles = {
+let data =
+    JSON.parse(
+        localStorage.getItem("jbWorldData")
+    ) || {
 
-    tasks:
-        "📋 Today's Task",
+        tasks: [],
+        groceries: [],
+        vegetables: [],
+        todo: []
 
-    groceries:
-        "🛒 Groceries",
-
-    vegetables:
-        "🥕 Vegetables",
-
-    todo:
-        "✅ To Do List"
-
-};
+    };
 
 
 /* =====================================================
-   GET TODAY'S DATE
-   ===================================================== */
+   EXPENSE VARIABLES
+===================================================== */
 
-function getTodayDate() {
+let currentPerson = "abi";
 
-    const today = new Date();
+let currentMonth =
+    new Date().toISOString().slice(0, 7);
 
-    const year =
-        today.getFullYear();
+let currentExpenses = [];
 
-    const month =
-        String(
-            today.getMonth() + 1
-        ).padStart(2, "0");
+let currentBudget = 0;
 
-    const day =
-        String(
-            today.getDate()
-        ).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-
-}
+let editingExpenseId = null;
 
 
 /* =====================================================
    SHOW TAB
-   ===================================================== */
+===================================================== */
 
 function showTab(tab, button) {
 
     currentTab = tab;
-
 
     document
         .querySelectorAll(".tab-button")
@@ -709,350 +629,232 @@ function showTab(tab, button) {
 
         });
 
+    if (button) {
 
-    button.classList.add("active");
+        button.classList.add("active");
 
-
-    document
-        .getElementById("sectionTitle")
-        .innerText =
-            tabTitles[tab];
+    }
 
 
-    loadItems();
+    if (
+        tab === "abi-expense" ||
+        tab === "jebi-expense"
+    ) {
+
+        currentPerson =
+            tab === "abi-expense"
+                ? "abi"
+                : "jebi";
+
+        renderExpensePage();
+
+    } else {
+
+        renderNormalPage();
+
+    }
 
 }
 
 
 /* =====================================================
-   ADD ITEM
-   ===================================================== */
+   NORMAL PAGE
+===================================================== */
 
-async function addItem() {
+function renderNormalPage() {
 
+    const titles = {
 
-    const name =
-        document
-        .getElementById("itemName")
-        .value
-        .trim();
+        tasks: "Today's Task",
 
+        groceries: "Groceries",
 
-    const description =
-        document
-        .getElementById("itemDescription")
-        .value
-        .trim();
+        vegetables: "Vegetables",
+
+        todo: "To Do List"
+
+    };
 
 
-    if (name === "") {
-
-        alert(
-            "Please enter a name."
-        );
-
-        return;
-
-    }
+    const app =
+        document.getElementById("app");
 
 
-    const today =
-        getTodayDate();
+    app.innerHTML = `
 
+        <h2 class="section-title">
+            ${titles[currentTab]}
+        </h2>
 
-    /*
-        Add to Supabase
-    */
+        <div class="add-box">
 
-    const { data, error } =
-        await db
-        .from("household_items")
-        .insert([
+            <div class="form-row">
 
-            {
+                <input
+                    type="text"
+                    id="normalName"
+                    placeholder="Name">
 
-                category:
-                    currentTab,
+                <input
+                    type="text"
+                    id="normalDescription"
+                    placeholder="Description">
 
-                name:
-                    name,
+                <button
+                    class="add-btn"
+                    onclick="addNormalItem()">
+                    Add
+                </button>
 
-                description:
-                    description,
+            </div>
 
-                completed:
-                    false,
+        </div>
 
-                task_date:
-                    today
+        <div class="table-container">
 
-            }
+            <table>
 
-        ]);
+                <thead>
 
+                    <tr>
 
-    if (error) {
+                        <th>S.No</th>
 
-        console.error(error);
+                        <th>Name</th>
 
-        alert(
-            "Unable to add item. Check Supabase connection."
-        );
+                        <th>Description</th>
 
-        return;
+                        <th>Status</th>
 
-    }
+                        <th>Action</th>
 
+                    </tr>
 
-    /*
-        Clear inputs
-    */
+                </thead>
 
-    document
-        .getElementById("itemName")
-        .value = "";
+                <tbody id="normalTableBody"></tbody>
 
+            </table>
 
-    document
-        .getElementById("itemDescription")
-        .value = "";
-
-
-    /*
-        Reload table
-    */
-
-    loadItems();
-
-}
-
-
-/* =====================================================
-   LOAD ITEMS
-   ===================================================== */
-
-async function loadItems() {
-
-
-    const tableBody =
-        document
-        .getElementById("tableBody");
-
-
-    tableBody.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="5"
-                class="loading">
-
-                Loading...
-
-            </td>
-
-        </tr>
+        </div>
 
     `;
 
 
-    /*
-        Start query
-    */
-
-    let query =
-        db
-        .from("household_items")
-        .select("*")
-        .eq(
-            "category",
-            currentTab
-        );
-
-
-    /*
-        Today's Task:
-        Only show today's items
-    */
-
-    if (currentTab === "tasks") {
-
-        query =
-            query.eq(
-                "task_date",
-                getTodayDate()
-            );
-
-    }
-
-
-    /*
-        Newest first
-    */
-
-    query =
-        query.order(
-            "created_at",
-            {
-                ascending: false
-            }
-        );
-
-
-    const { data, error } =
-        await query;
-
-
-    if (error) {
-
-        console.error(error);
-
-        tableBody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="5"
-                    class="loading">
-
-                    ❌ Unable to load data
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    renderTable(data);
+    renderNormalTable();
 
 }
 
 
 /* =====================================================
-   RENDER TABLE
-   ===================================================== */
+   ADD NORMAL ITEM
+===================================================== */
 
-function renderTable(items) {
+function addNormalItem() {
 
-
-    const tableBody =
+    const name =
         document
-        .getElementById("tableBody");
+        .getElementById("normalName")
+        .value
+        .trim();
+
+    const description =
+        document
+        .getElementById("normalDescription")
+        .value
+        .trim();
 
 
-    tableBody.innerHTML = "";
+    if (!name) {
 
-
-    if (
-        !items ||
-        items.length === 0
-    ) {
-
-        tableBody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="5"
-                    class="loading">
-
-                    No items added yet ❤️
-
-                </td>
-
-            </tr>
-
-        `;
+        alert("Please enter a name.");
 
         return;
 
     }
 
 
-    items.forEach(
-        (item, index) => {
+    data[currentTab].push({
 
+        id: Date.now(),
+
+        name: name,
+
+        description: description,
+
+        status: "Pending"
+
+    });
+
+
+    saveData();
+
+    renderNormalTable();
+
+
+    document.getElementById("normalName").value = "";
+
+    document.getElementById("normalDescription").value = "";
+
+}
+
+
+/* =====================================================
+   RENDER NORMAL TABLE
+===================================================== */
+
+function renderNormalTable() {
+
+    const tbody =
+        document.getElementById(
+            "normalTableBody"
+        );
+
+
+    if (!tbody) return;
+
+
+    tbody.innerHTML = "";
+
+
+    data[currentTab].forEach(
+        (item, index) => {
 
             const row =
                 document.createElement("tr");
 
 
-            if (item.completed) {
-
-                row.classList.add(
-                    "completed"
-                );
-
-            }
-
-
             row.innerHTML = `
 
-                <td>
-                    ${index + 1}
-                </td>
-
+                <td>${index + 1}</td>
 
                 <td>
-                    ${escapeHTML(
-                        item.name
-                    )}
+                    ${escapeHTML(item.name)}
                 </td>
-
 
                 <td>
-                    ${escapeHTML(
-                        item.description || ""
-                    )}
+                    ${escapeHTML(item.description)}
                 </td>
-
-
-                <td>
-
-                    <input
-
-                        type="checkbox"
-
-                        class="status-checkbox"
-
-                        ${
-                            item.completed
-                            ? "checked"
-                            : ""
-                        }
-
-                        onchange="
-                            toggleStatus(
-                                ${item.id},
-                                ${item.completed}
-                            )
-                        "
-
-                    >
-
-                </td>
-
 
                 <td>
 
                     <button
+                        class="status-btn"
+                        onclick="toggleStatus(${item.id})">
 
+                        ${item.status}
+
+                    </button>
+
+                </td>
+
+                <td>
+
+                    <button
                         class="delete-btn"
+                        onclick="deleteNormalItem(${item.id})">
 
-                        onclick="
-                            deleteItem(
-                                ${item.id}
-                            )
-                        "
-
-                    >
-
-                        🗑️ Delete
+                        Delete
 
                     </button>
 
@@ -1061,9 +863,7 @@ function renderTable(items) {
             `;
 
 
-            tableBody.appendChild(
-                row
-            );
+            tbody.appendChild(row);
 
         }
     );
@@ -1072,88 +872,418 @@ function renderTable(items) {
 
 
 /* =====================================================
-   UPDATE STATUS
-   ===================================================== */
+   TOGGLE STATUS
+===================================================== */
 
-async function toggleStatus(
-    id,
-    currentStatus
-) {
+function toggleStatus(id) {
 
-
-    const newStatus =
-        !currentStatus;
+    const item =
+        data[currentTab]
+        .find(x => x.id === id);
 
 
-    const { error } =
-        await db
-        .from("household_items")
-        .update({
-
-            completed:
-                newStatus
-
-        })
-        .eq(
-            "id",
-            id
-        );
+    if (!item) return;
 
 
-    if (error) {
-
-        console.error(error);
-
-        alert(
-            "Unable to update status."
-        );
-
-        return;
-
-    }
+    item.status =
+        item.status === "Completed"
+            ? "Pending"
+            : "Completed";
 
 
-    loadItems();
+    saveData();
+
+    renderNormalTable();
 
 }
 
 
 /* =====================================================
-   DELETE ITEM
-   ===================================================== */
+   DELETE NORMAL ITEM
+===================================================== */
 
-async function deleteItem(id) {
+function deleteNormalItem(id) {
 
-
-    const confirmDelete =
-        confirm(
+    if (
+        !confirm(
             "Are you sure you want to delete this item?"
-        );
-
-
-    if (!confirmDelete) {
+        )
+    ) {
 
         return;
 
     }
 
 
-    const { error } =
-        await db
-        .from("household_items")
-        .delete()
-        .eq(
-            "id",
-            id
+    data[currentTab] =
+        data[currentTab]
+        .filter(x => x.id !== id);
+
+
+    saveData();
+
+    renderNormalTable();
+
+}
+
+
+/* =====================================================
+   SAVE LOCAL DATA
+===================================================== */
+
+function saveData() {
+
+    localStorage.setItem(
+        "jbWorldData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =====================================================
+   EXPENSE PAGE
+===================================================== */
+
+async function renderExpensePage() {
+
+    const personName =
+        currentPerson === "abi"
+            ? "Abi Expense"
+            : "JEBI Expense";
+
+
+    const app =
+        document.getElementById("app");
+
+
+    app.innerHTML = `
+
+        <div class="expense-top">
+
+            <h2 class="section-title">
+                ${personName}
+            </h2>
+
+            <div class="month-box">
+
+                <label>
+                    Select Month
+                </label>
+
+                <input
+                    type="month"
+                    id="monthSelector"
+                    value="${currentMonth}"
+                    onchange="changeExpenseMonth()">
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <h4>
+                    Total Amount
+                </h4>
+
+                <div
+                    class="amount"
+                    id="totalAmount">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h4>
+                    Total Spent
+                </h4>
+
+                <div
+                    class="amount"
+                    id="totalSpent">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card balance-card">
+
+                <h4>
+                    Current Balance
+                </h4>
+
+                <div
+                    class="amount"
+                    id="currentBalance">
+                    ₹0.00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EDIT TOTAL AMOUNT -->
+
+        <div class="budget-box">
+
+            <h3 style="margin-bottom:12px;color:#102a43;">
+                Monthly Total Amount
+            </h3>
+
+            <div class="budget-row">
+
+                <input
+                    type="number"
+                    id="budgetInput"
+                    placeholder="Enter total amount"
+                    min="0"
+                    step="0.01">
+
+                <button
+                    class="add-btn"
+                    onclick="saveBudget()">
+
+                    Save / Edit Total Amount
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADD EXPENSE -->
+
+        <div class="add-box">
+
+            <h3 style="margin-bottom:12px;color:#102a43;">
+                Add Expense
+            </h3>
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="expenseItem"
+                    placeholder="Items">
+
+                <input
+                    type="number"
+                    id="expenseCost"
+                    placeholder="Cost"
+                    min="0"
+                    step="0.01">
+
+                <button
+                    class="add-btn"
+                    onclick="addExpense()">
+
+                    Add
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPENSE TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Items</th>
+
+                        <th>Cost</th>
+
+                        <th>Current Balance</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="expenseTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+
+    await loadExpenses();
+
+}
+
+
+/* =====================================================
+   CHANGE MONTH
+===================================================== */
+
+async function changeExpenseMonth() {
+
+    const selector =
+        document.getElementById(
+            "monthSelector"
         );
 
 
-    if (error) {
+    currentMonth = selector.value;
+
+
+    await loadExpenses();
+
+}
+
+
+/* =====================================================
+   LOAD EXPENSES
+===================================================== */
+
+async function loadExpenses() {
+
+    try {
+
+        const {
+            data: budgetData,
+            error: budgetError
+        } =
+        await supabaseClient
+            .from("expense_budgets")
+            .select("*")
+            .eq("person", currentPerson)
+            .eq("month", currentMonth)
+            .maybeSingle();
+
+
+        if (budgetError) {
+
+            console.error(budgetError);
+
+            alert(
+                "Unable to load monthly amount."
+            );
+
+            return;
+
+        }
+
+
+        currentBudget =
+            budgetData
+                ? Number(
+                    budgetData.total_amount
+                  )
+                : 0;
+
+
+        const {
+            data: expenseData,
+            error: expenseError
+        } =
+        await supabaseClient
+            .from("expenses")
+            .select("*")
+            .eq("person", currentPerson)
+            .eq("month", currentMonth)
+            .order("id", {
+                ascending: true
+            });
+
+
+        if (expenseError) {
+
+            console.error(expenseError);
+
+            alert(
+                "Unable to load expenses."
+            );
+
+            return;
+
+        }
+
+
+        currentExpenses =
+            expenseData || [];
+
+
+        renderExpenseTable();
+
+        updateSummary();
+
+
+        const budgetInput =
+            document.getElementById(
+                "budgetInput"
+            );
+
+
+        if (budgetInput) {
+
+            budgetInput.value =
+                currentBudget || "";
+
+        }
+
+    } catch (error) {
 
         console.error(error);
 
         alert(
-            "Unable to delete item."
+            "Something went wrong while loading expenses."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE / EDIT BUDGET
+===================================================== */
+
+async function saveBudget() {
+
+    const input =
+        document.getElementById(
+            "budgetInput"
+        );
+
+
+    const amount =
+        Number(input.value);
+
+
+    if (
+        isNaN(amount) ||
+        amount < 0
+    ) {
+
+        alert(
+            "Please enter a valid amount."
         );
 
         return;
@@ -1161,40 +1291,591 @@ async function deleteItem(id) {
     }
 
 
-    loadItems();
+    try {
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from("expense_budgets")
+            .upsert({
+
+                person: currentPerson,
+
+                month: currentMonth,
+
+                total_amount: amount
+
+            }, {
+
+                onConflict:
+                    "person,month"
+
+            })
+            .select()
+            .single();
+
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "Unable to save total amount."
+            );
+
+            return;
+
+        }
+
+
+        currentBudget =
+            Number(
+                data.total_amount
+            );
+
+
+        updateSummary();
+
+
+        alert(
+            "Monthly Total Amount saved successfully."
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
 
 /* =====================================================
-   HTML SECURITY
-   ===================================================== */
+   ADD EXPENSE
+===================================================== */
 
-function escapeHTML(text) {
+async function addExpense() {
+
+    const itemInput =
+        document.getElementById(
+            "expenseItem"
+        );
+
+    const costInput =
+        document.getElementById(
+            "expenseCost"
+        );
 
 
-    const div =
-        document.createElement("div");
+    const item =
+        itemInput.value.trim();
+
+    const cost =
+        Number(costInput.value);
 
 
-    div.textContent =
-        text;
+    if (!item) {
+
+        alert(
+            "Please enter the item."
+        );
+
+        return;
+
+    }
 
 
-    return div.innerHTML;
+    if (
+        isNaN(cost) ||
+        cost <= 0
+    ) {
+
+        alert(
+            "Please enter a valid cost."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("expenses")
+            .insert({
+
+                person: currentPerson,
+
+                item: item,
+
+                cost: cost,
+
+                month: currentMonth
+
+            });
+
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "Unable to add expense."
+            );
+
+            return;
+
+        }
+
+
+        itemInput.value = "";
+
+        costInput.value = "";
+
+
+        await loadExpenses();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
 
 /* =====================================================
-   START WEBSITE
-   ===================================================== */
+   RENDER EXPENSE TABLE
+===================================================== */
 
-loadItems();
+function renderExpenseTable() {
+
+    const tbody =
+        document.getElementById(
+            "expenseTableBody"
+        );
+
+
+    if (!tbody) return;
+
+
+    tbody.innerHTML = "";
+
+
+    const totalSpent =
+        currentExpenses.reduce(
+            (sum, expense) =>
+                sum + Number(expense.cost),
+            0
+        );
+
+
+    const balance =
+        currentBudget - totalSpent;
+
+
+    currentExpenses.forEach(
+        (expense, index) => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${escapeHTML(expense.item)}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        expense.cost
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ₹${balance.toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="edit-btn"
+                        onclick="openExpenseEdit(${expense.id})">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteExpense(${expense.id})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        }
+    );
+
+
+    if (
+        currentExpenses.length === 0
+    ) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    style="padding:25px;color:#627d98;">
+
+                    No expenses added for this month.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE SUMMARY
+===================================================== */
+
+function updateSummary() {
+
+    const totalSpent =
+        currentExpenses.reduce(
+            (sum, expense) =>
+                sum + Number(expense.cost),
+            0
+        );
+
+
+    const balance =
+        currentBudget - totalSpent;
+
+
+    const totalAmount =
+        document.getElementById(
+            "totalAmount"
+        );
+
+    const spent =
+        document.getElementById(
+            "totalSpent"
+        );
+
+    const currentBalance =
+        document.getElementById(
+            "currentBalance"
+        );
+
+
+    if (totalAmount) {
+
+        totalAmount.innerText =
+            formatCurrency(
+                currentBudget
+            );
+
+    }
+
+
+    if (spent) {
+
+        spent.innerText =
+            formatCurrency(
+                totalSpent
+            );
+
+    }
+
+
+    if (currentBalance) {
+
+        currentBalance.innerText =
+            formatCurrency(
+                balance
+            );
+
+    }
+
+
+    renderExpenseTable();
+
+}
+
+
+/* =====================================================
+   OPEN EXPENSE EDIT
+===================================================== */
+
+function openExpenseEdit(id) {
+
+    const expense =
+        currentExpenses.find(
+            x => x.id === id
+        );
+
+
+    if (!expense) return;
+
+
+    editingExpenseId = id;
+
+
+    document.getElementById(
+        "editExpenseItem"
+    ).value = expense.item;
+
+
+    document.getElementById(
+        "editExpenseCost"
+    ).value = expense.cost;
+
+
+    document.getElementById(
+        "expenseModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =====================================================
+   CLOSE EXPENSE MODAL
+===================================================== */
+
+function closeExpenseModal() {
+
+    document.getElementById(
+        "expenseModal"
+    ).style.display = "none";
+
+
+    editingExpenseId = null;
+
+}
+
+
+/* =====================================================
+   SAVE EXPENSE EDIT
+===================================================== */
+
+async function saveExpenseEdit() {
+
+    if (!editingExpenseId) return;
+
+
+    const item =
+        document.getElementById(
+            "editExpenseItem"
+        ).value.trim();
+
+
+    const cost =
+        Number(
+            document.getElementById(
+                "editExpenseCost"
+            ).value
+        );
+
+
+    if (!item) {
+
+        alert(
+            "Please enter the item."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        isNaN(cost) ||
+        cost <= 0
+    ) {
+
+        alert(
+            "Please enter a valid cost."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("expenses")
+            .update({
+
+                item: item,
+
+                cost: cost
+
+            })
+            .eq(
+                "id",
+                editingExpenseId
+            );
+
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "Unable to update expense."
+            );
+
+            return;
+
+        }
+
+
+        closeExpenseModal();
+
+        await loadExpenses();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   DELETE EXPENSE
+===================================================== */
+
+async function deleteExpense(id) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this expense?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("expenses")
+            .delete()
+            .eq("id", id);
+
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "Unable to delete expense."
+            );
+
+            return;
+
+        }
+
+
+        await loadExpenses();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   CURRENCY
+===================================================== */
+
+function formatCurrency(amount) {
+
+    return (
+        "₹" +
+        Number(amount)
+            .toLocaleString(
+                "en-IN",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            )
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+showTab(
+    "tasks",
+    document.querySelector(
+        ".tab-button"
+    )
+);
 
 </script>
 
-
 </body>
-
 </html>
