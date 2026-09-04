@@ -10,368 +10,369 @@
 
     <style>
 
-        * {
-            box-sizing: border-box;
-        }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f3f4f6;
-            color: #1f2937;
-        }
+<style>
 
-        /* =========================
-           HEADER
-        ========================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .header {
-            background: #0b1f3a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+}
 
-        .header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+/* =========================
+   HEADER
 
-        .header p {
-            margin: 6px 0 0;
-            color: #d1d5db;
-        }
+.header {
+    background: #102a43;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
 
-        /* =========================
-           TABS
-        ========================= */
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
 
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: white;
-            padding: 12px;
-            border-bottom: 1px solid #d1d5db;
-        }
+.header p {
+    color: #d9e2ec;
+    font-size: 14px;
+}
 
-        .tab-button {
-            background: #e5e7eb;
-            color: #1f2937;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
 
-        .tab-button:hover {
-            background: #d1d5db;
-        }
+/* =========================
+   TABS
 
-        .tab-button.active {
-            background: #0b1f3a;
-            color: white;
-        }
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    background: white;
+    padding: 12px;
+    border-bottom: 1px solid #d9e2ec;
+}
 
-        /* =========================
-           CONTAINER
-        ========================= */
+.tab-button {
+    border: none;
+    background: #e9eef3;
+    color: #243b53;
+    padding: 11px 17px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
 
-        .container {
-            max-width: 1250px;
-            margin: auto;
-            padding: 20px;
-        }
+.tab-button:hover {
+    background: #d9e2ec;
+}
 
-        .tab-content {
-            display: none;
-        }
+.tab-button.active {
+    background: #102a43;
+    color: white;
+}
 
-        .tab-content.active {
-            display: block;
-        }
 
-        .section-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #0b1f3a;
-            margin-bottom: 15px;
-        }
+/* =========================
+   MAIN CONTAINER
 
-        /* =========================
-           FORM
-        ========================= */
+.container {
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 0 15px;
+}
 
-        .add-box {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+.section-title {
+    font-size: 24px;
+    color: #102a43;
+    margin-bottom: 18px;
+}
 
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
 
-        input,
-        select {
-            padding: 11px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 15px;
-            background: white;
-        }
+/* =========================
+   NORMAL ADD BOX
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #0b1f3a;
-        }
+.add-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-        .add-btn {
-            background: #0b1f3a;
-            color: white;
-            border: none;
-            padding: 11px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
-        .add-btn:hover {
-            background: #163b6d;
-        }
+input,
+select {
+    padding: 12px;
+    border: 1px solid #bcccdc;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
 
-        .reset-btn {
-            background: #6b7280;
-            color: white;
-            border: none;
-            padding: 11px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+input:focus,
+select:focus {
+    border-color: #2f6690;
+}
 
-        /* =========================
-           TABLE
-        ========================= */
+.form-row input {
+    flex: 1;
+    min-width: 180px;
+}
 
-        .table-container {
-            background: white;
-            border-radius: 10px;
-            overflow-x: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+.add-btn {
+    background: #2f6690;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 750px;
-        }
+.add-btn:hover {
+    background: #245477;
+}
 
-        th {
-            background: #0b1f3a;
-            color: white;
-            padding: 12px;
-            text-align: left;
-            white-space: nowrap;
-        }
 
-        td {
-            padding: 11px;
-            border-bottom: 1px solid #e5e7eb;
-        }
+/* =========================
+   TABLE
 
-        tr:hover {
-            background: #f8fafc;
-        }
+.table-container {
+    background: white;
+    border-radius: 10px;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-        .status-done {
-            color: #15803d;
-            font-weight: bold;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
 
-        .status-pending {
-            color: #b45309;
-            font-weight: bold;
-        }
+th {
+    background: #102a43;
+    color: white;
+    padding: 13px;
+    text-align: center;
+}
 
-        .action-btn {
-            border: none;
-            padding: 7px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 4px;
-            font-weight: bold;
-        }
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+}
 
-        .edit-btn {
-            background: #e5e7eb;
-            color: #111827;
-        }
+tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+
+.edit-btn {
+    background: #486581;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    background: #334e68;
+}
+
+.delete-btn {
+    background: #c0392b;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #a93226;
+}
 
         .delete-btn {
             background: #fee2e2;
             color: #b91c1c;
         }
 
-        .balance-positive {
-            color: #15803d;
-            font-weight: bold;
-        }
+/* =========================
+   STATUS
 
-        .balance-negative {
-            color: #b91c1c;
-            font-weight: bold;
-        }
+.status-btn {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #d9e2ec;
+    color: #243b53;
+}
 
-        /* =========================
-           EXPENSE SUMMARY
-        ========================= */
 
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+/* =========================
+   EXPENSE PAGE
 
-        .summary-card {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+.expense-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
 
-        .summary-card h3 {
-            margin: 0 0 8px;
-            color: #64748b;
-            font-size: 14px;
-        }
+.month-box {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.07);
+}
 
-        .summary-card .amount {
-            font-size: 25px;
-            font-weight: bold;
-            color: #0b1f3a;
-        }
+.month-box label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #486581;
+    display: block;
+    margin-bottom: 5px;
+}
 
-        /* =========================
-           BUDGET
-        ========================= */
 
-        .budget-box {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+/* =========================
+   SUMMARY CARDS
 
-        .budget-box h3 {
-            margin-top: 0;
-            color: #0b1f3a;
-        }
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
-        /* =========================
-           REPORT
-        ========================= */
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 5px solid #2f6690;
+}
 
-        .report-filters {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+.summary-card h4 {
+    color: #627d98;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
 
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
+.summary-card .amount {
+    font-size: 23px;
+    font-weight: bold;
+    color: #102a43;
+}
 
-        .filter-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+.balance-card {
+    border-left-color: #486581;
+}
 
-        .filter-item label {
-            font-size: 13px;
-            font-weight: bold;
-            color: #475569;
-        }
 
-        .price-range {
-            display: flex;
-            gap: 8px;
-        }
+/* =========================
+   BUDGET EDIT
 
-        .price-range input {
-            width: 50%;
-        }
+.budget-box {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-        .report-buttons {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+.budget-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-        .report-summary {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+.budget-row input {
+    flex: 1;
+    min-width: 180px;
+}
 
-        .category-summary {
-            background: white;
-            padding: 18px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
 
-        .category-summary h3 {
-            color: #0b1f3a;
-        }
+/* =========================
+   MODAL
 
-        /* =========================
-           MODAL
-        ========================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 430px;
+    border-radius: 10px;
+    padding: 22px;
+}
 
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            padding: 22px;
-        }
+.modal-content h3 {
+    color: #102a43;
+    margin-bottom: 15px;
+}
 
-        .modal-content h2 {
-            margin-top: 0;
-            color: #0b1f3a;
-        }
+.modal-content input {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cancel-btn {
+    background: #d9e2ec;
+    color: #243b53;
+    border: none;
+    padding: 10px 17px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #2f6690;
+    color: white;
+    border: none;
+    padding: 10px 17px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
         .modal-row {
             display: flex;
@@ -380,70 +381,6 @@
             margin-bottom: 14px;
         }
 
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 800px) {
-
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .report-summary {
-                grid-template-columns: 1fr;
-            }
-
-            .filter-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                flex-direction: column;
-            }
-
-            .form-row input,
-            .form-row select,
-            .form-row button {
-                width: 100%;
-            }
-
-            .tabs {
-                justify-content: flex-start;
-                overflow-x: auto;
-                flex-wrap: nowrap;
-            }
-
-            .tab-button {
-                white-space: nowrap;
-            }
-        }
-
-    </style>
-</head>
-
-<body>
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <div class="header">
     <h1>JB World</h1>
@@ -453,7 +390,6 @@
 
 <!-- =========================
      TABS
-========================= -->
 
 <div class="tabs">
 
@@ -655,37 +591,299 @@
         <div class="table-container">
 
             <table>
+/* =========================
+   FOOTER
 
-                <thead>
+.footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 35px;
+    background: #102a43;
+    color: #d9e2ec;
+    font-size: 13px;
+}
 
-                    <tr>
-                        <th>S.No</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
 
-                </thead>
+/* =========================
+   MOBILE
 
-                <tbody id="vegetablesTable"></tbody>
+@media (max-width: 700px) {
 
-            </table>
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+
+    .tab-button {
+        white-space: nowrap;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        margin-top: 18px;
+    }
+
+    .expense-top {
+        align-items: stretch;
+    }
+
+    .month-box {
+        width: 100%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+
+<div class="header">
+
+    <h1>JB World</h1>
+
+    <p>Our Little Household Manager</p>
+
+</div>
+
+
+<!-- =========================
+     TABS
+
+<div class="tabs">
+
+    <button class="tab-button active"
+            onclick="showTab('tasks', this)">
+        Today's Task
+    </button>
+
+    <button class="tab-button"
+            onclick="showTab('groceries', this)">
+        Groceries
+    </button>
+
+    <button class="tab-button"
+            onclick="showTab('vegetables', this)">
+        Vegetables
+    </button>
+
+    <button class="tab-button"
+            onclick="showTab('todo', this)">
+        To Do List
+    </button>
+
+    <button class="tab-button"
+            onclick="showTab('abi-expense', this)">
+        Abi Expense
+    </button>
+
+    <button class="tab-button"
+            onclick="showTab('jebi-expense', this)">
+        JEBI Expense
+    </button>
+
+</div>
+
+
+<!-- =========================
+     MAIN
+
+<div class="container">
+
+    <div id="app"></div>
+
+</div>
+
+
+<div class="footer">
+
+    JB World © 2026
+
+</div>
+
+
+
+<!-- =========================
+     EXPENSE EDIT MODAL
+
+<div class="modal" id="expenseModal">
+
+    <div class="modal-content">
+
+        <h3>Edit Expense</h3>
+
+        <input
+            type="text"
+            id="editExpenseItem"
+            placeholder="Items">
+
+        <input
+            type="number"
+            id="editExpenseCost"
+            placeholder="Cost"
+            min="0"
+            step="0.01">
+
+        <div class="modal-actions">
+
+            <button
+                class="cancel-btn"
+                onclick="closeExpenseModal()">
+                Cancel
+            </button>
+
+            <button
+                class="save-btn"
+                onclick="saveExpenseEdit()">
+                Save
+            </button>
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- =====================================================
-         TO DO
-    ====================================================== -->
 
-    <div id="todo" class="tab-content">
 
-        <div class="section-title">
-            To Do List
-        </div>
+<script>
+
+/* =====================================================
+   SUPABASE
+
+const SUPABASE_URL =
+    "https://zuokrmjppxnlcmumeamq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_pZJjNN3iLCqWTxunDCKsvQ_WEphdmiZ";
+
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =====================================================
+   CURRENT TAB
+
+let currentTab = "tasks";
+
+
+/* =====================================================
+   NORMAL HOUSEHOLD DATA
+
+let data =
+    JSON.parse(
+        localStorage.getItem("jbWorldData")
+    ) || {
+
+        tasks: [],
+        groceries: [],
+        vegetables: [],
+        todo: []
+
+    };
+
+
+/* =====================================================
+   EXPENSE VARIABLES
+
+let currentPerson = "abi";
+
+let currentMonth =
+    new Date().toISOString().slice(0, 7);
+
+let currentExpenses = [];
+
+let currentBudget = 0;
+
+let editingExpenseId = null;
+
+
+/* =====================================================
+   SHOW TAB
+
+function showTab(tab, button) {
+
+    currentTab = tab;
+
+    document
+        .querySelectorAll(".tab-button")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+
+    if (
+        tab === "abi-expense" ||
+        tab === "jebi-expense"
+    ) {
+
+        currentPerson =
+            tab === "abi-expense"
+                ? "abi"
+                : "jebi";
+
+        renderExpensePage();
+
+    } else {
+
+        renderNormalPage();
+
+    }
+
+}
+
+
+/* =====================================================
+   NORMAL PAGE
+
+function renderNormalPage() {
+
+    const titles = {
+
+        tasks: "Today's Task",
+
+        groceries: "Groceries",
+
+        vegetables: "Vegetables",
+
+        todo: "To Do List"
+
+    };
+
+
+    const app =
+        document.getElementById("app");
+
+
+    app.innerHTML = `
+
+        <h2 class="section-title">
+            ${titles[currentTab]}
+        </h2>
 
         <div class="add-box">
 
@@ -693,21 +891,18 @@
 
                 <input
                     type="text"
-                    id="todoName"
-                    placeholder="Task name"
-                >
+                    id="normalName"
+                    placeholder="Name">
 
                 <input
                     type="text"
-                    id="todoDescription"
-                    placeholder="Description"
-                >
+                    id="normalDescription"
+                    placeholder="Description">
 
                 <button
                     class="add-btn"
-                    onclick="addOldItem('todo')"
-                >
-                    Add Task
+                    onclick="addNormalItem()">
+                    Add
                 </button>
 
             </div>
@@ -721,77 +916,345 @@
                 <thead>
 
                     <tr>
+
                         <th>S.No</th>
+
                         <th>Name</th>
+
                         <th>Description</th>
+
                         <th>Status</th>
+
                         <th>Action</th>
+
                     </tr>
 
                 </thead>
 
-                <tbody id="todoTable"></tbody>
+                <tbody id="normalTableBody"></tbody>
 
             </table>
 
         </div>
 
-    </div>
+    `;
 
 
-    <!-- =====================================================
-         ABI EXPENSE
-    ====================================================== -->
+    renderNormalTable();
 
-    <div id="abiExpense" class="tab-content">
+}
 
-        <div class="section-title">
-            Abi Expense
+                <thead>
+
+/* =====================================================
+   ADD NORMAL ITEM
+
+function addNormalItem() {
+
+    const name =
+        document
+        .getElementById("normalName")
+        .value
+        .trim();
+
+    const description =
+        document
+        .getElementById("normalDescription")
+        .value
+        .trim();
+
+
+    if (!name) {
+
+        alert("Please enter a name.");
+
+        return;
+
+    }
+
+
+    data[currentTab].push({
+
+        id: Date.now(),
+
+        name: name,
+
+        description: description,
+
+        status: "Pending"
+
+    });
+
+
+    saveData();
+
+    renderNormalTable();
+
+
+    document.getElementById("normalName").value = "";
+
+    document.getElementById("normalDescription").value = "";
+
+}
+
         </div>
 
-        <!-- Month -->
+/* =====================================================
+   RENDER NORMAL TABLE
+
+function renderNormalTable() {
+
+    const tbody =
+        document.getElementById(
+            "normalTableBody"
+        );
+
+
+    if (!tbody) return;
+
+
+    tbody.innerHTML = "";
+
+
+    data[currentTab].forEach(
+        (item, index) => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>${index + 1}</td>
+
+                <td>
+                    ${escapeHTML(item.name)}
+                </td>
+
+                <td>
+                    ${escapeHTML(item.description)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="status-btn"
+                        onclick="toggleStatus(${item.id})">
+
+                        ${item.status}
+
+                    </button>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteNormalItem(${item.id})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        }
+    );
+
+}
 
         <div class="add-box">
 
-            <div class="form-row">
+/* =====================================================
+   TOGGLE STATUS
+
+function toggleStatus(id) {
+
+    const item =
+        data[currentTab]
+        .find(x => x.id === id);
+
+
+    if (!item) return;
+
+
+    item.status =
+        item.status === "Completed"
+            ? "Pending"
+            : "Completed";
+
+
+    saveData();
+
+    renderNormalTable();
+
+}
+
+            <table>
+
+/* =====================================================
+   DELETE NORMAL ITEM
+
+function deleteNormalItem(id) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this item?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    data[currentTab] =
+        data[currentTab]
+        .filter(x => x.id !== id);
+
+
+    saveData();
+
+    renderNormalTable();
+
+}
+
+
+/* =====================================================
+   SAVE LOCAL DATA
+
+function saveData() {
+
+    localStorage.setItem(
+        "jbWorldData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =====================================================
+   EXPENSE PAGE
+
+async function renderExpensePage() {
+
+    const personName =
+        currentPerson === "abi"
+            ? "Abi Expense"
+            : "JEBI Expense";
+
+
+    const app =
+        document.getElementById("app");
+
+
+    app.innerHTML = `
+
+        <div class="expense-top">
+
+            <h2 class="section-title">
+                ${personName}
+            </h2>
+
+            <div class="month-box">
 
                 <label>
-                    Month:
-                    <input
-                        type="month"
-                        id="abiMonth"
-                        onchange="loadExpenseScreen('abi')"
-                    >
+                    Select Month
                 </label>
+
+                <input
+                    type="month"
+                    id="monthSelector"
+                    value="${currentMonth}"
+                    onchange="changeExpenseMonth()">
 
             </div>
 
         </div>
 
+        <div class="budget-box">
 
-        <!-- Budget -->
+        <!-- SUMMARY -->
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <h4>
+                    Total Amount
+                </h4>
+
+                <div
+                    class="amount"
+                    id="totalAmount">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h4>
+                    Total Spent
+                </h4>
+
+                <div
+                    class="amount"
+                    id="totalSpent">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card balance-card">
+
+                <h4>
+                    Current Balance
+                </h4>
+
+                <div
+                    class="amount"
+                    id="currentBalance">
+                    ₹0.00
+                </div>
+
+            </div>
+
+        </div>
+
+            </div>
+
+        <!-- EDIT TOTAL AMOUNT -->
 
         <div class="budget-box">
 
-            <h3>
+            <h3 style="margin-bottom:12px;color:#102a43;">
                 Monthly Total Amount
             </h3>
 
-            <div class="form-row">
+            <div class="budget-row">
 
                 <input
                     type="number"
-                    id="abiBudget"
+                    id="budgetInput"
                     placeholder="Enter total amount"
                     min="0"
-                    step="0.01"
-                >
+                    step="0.01">
 
                 <button
                     class="add-btn"
-                    onclick="saveBudget('abi')"
-                >
+                    onclick="saveBudget()">
+
                     Save / Edit Total Amount
+
                 </button>
 
             </div>
@@ -799,59 +1262,11 @@
         </div>
 
 
-        <!-- Summary -->
-
-        <div class="summary-grid">
-
-            <div class="summary-card">
-
-                <h3>Total Amount</h3>
-
-                <div
-                    class="amount"
-                    id="abiTotalAmount"
-                >
-                    ₹0.00
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <h3>Total Spent</h3>
-
-                <div
-                    class="amount"
-                    id="abiTotalSpent"
-                >
-                    ₹0.00
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <h3>Current Balance</h3>
-
-                <div
-                    class="amount"
-                    id="abiBalance"
-                >
-                    ₹0.00
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- Add Expense -->
+        <!-- ADD EXPENSE -->
 
         <div class="add-box">
 
-            <h3>
+            <h3 style="margin-bottom:12px;color:#102a43;">
                 Add Expense
             </h3>
 
@@ -859,99 +1274,30 @@
 
                 <input
                     type="text"
-                    id="abiItem"
-                    placeholder="Items"
-                >
+                    id="expenseItem"
+                    placeholder="Items">
 
                 <input
                     type="number"
-                    id="abiCost"
+                    id="expenseCost"
                     placeholder="Cost"
                     min="0"
-                    step="0.01"
-                >
-
-                <select id="abiCategory">
-
-                    <option value="">
-                        Select Category
-                    </option>
-
-                    <option value="Groceries">
-                        Groceries
-                    </option>
-
-                    <option value="Fuel">
-                        Fuel
-                    </option>
-
-                    <option value="Vegetables">
-                        Vegetables
-                    </option>
-
-                    <option value="Fruits">
-                        Fruits
-                    </option>
-
-                    <option value="Dairy">
-                        Dairy
-                    </option>
-
-                    <option value="Meat / Chicken / Fish">
-                        Meat / Chicken / Fish
-                    </option>
-
-                    <option value="Medical">
-                        Medical
-                    </option>
-
-                    <option value="Household">
-                        Household
-                    </option>
-
-                    <option value="Transport">
-                        Transport
-                    </option>
-
-                    <option value="Food / Restaurant">
-                        Food / Restaurant
-                    </option>
-
-                    <option value="Bills & Utilities">
-                        Bills & Utilities
-                    </option>
-
-                    <option value="Shopping">
-                        Shopping
-                    </option>
-
-                    <option value="Entertainment">
-                        Entertainment
-                    </option>
-
-                    <option value="Others">
-                        Others
-                    </option>
-
-                </select>
+                    step="0.01">
 
                 <button
                     class="add-btn"
-                    onclick="addExpense('abi')"
-                >
-                    Add Expense
+                    onclick="addExpense()">
+
+                    Add
+
                 </button>
 
             </div>
 
-            <p style="font-size:13px;color:#64748b;">
-                Date will automatically be today's date.
-            </p>
-
         </div>
 
 
-        <!-- Expense Table -->
+        <!-- EXPENSE TABLE -->
 
         <div class="table-container">
 
@@ -962,94 +1308,120 @@
                     <tr>
 
                         <th>ID</th>
-                        <th>Date</th>
+
                         <th>Items</th>
-                        <th>Category</th>
+
                         <th>Cost</th>
+
                         <th>Current Balance</th>
+
                         <th>Action</th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="abiExpenseTable"></tbody>
+                <tbody
+                    id="expenseTableBody">
+                </tbody>
 
             </table>
 
         </div>
 
-    </div>
+    `;
 
 
-    <!-- =====================================================
-         JEBI EXPENSE
-    ====================================================== -->
+    await loadExpenses();
 
-    <div id="jebiExpense" class="tab-content">
+}
 
-        <div class="section-title">
-            JEBI Expense
+
+/* =====================================================
+   CHANGE MONTH
+
+async function changeExpenseMonth() {
+
+    const selector =
+        document.getElementById(
+            "monthSelector"
+        );
+
+
+    currentMonth = selector.value;
+
+
+    await loadExpenses();
+
+}
+
+
+/* =====================================================
+   LOAD EXPENSES
+
+async function loadExpenses() {
+
+    try {
+
+        const {
+            data: budgetData,
+            error: budgetError
+        } =
+        await supabaseClient
+            .from("expense_budgets")
+            .select("*")
+            .eq("person", currentPerson)
+            .eq("month", currentMonth)
+            .maybeSingle();
+
+
+        if (budgetError) {
+
+            console.error(budgetError);
+
+            alert(
+                "Unable to load monthly amount."
+            );
+
+            return;
+
+        }
+
+
+        currentBudget =
+            budgetData
+                ? Number(
+                    budgetData.total_amount
+                  )
+                : 0;
+
+
+        const {
+            data: expenseData,
+            error: expenseError
+        } =
+        await supabaseClient
+            .from("expenses")
+            .select("*")
+            .eq("person", currentPerson)
+            .eq("month", currentMonth)
+            .order("id", {
+                ascending: true
+            });
+
         </div>
 
+        if (expenseError) {
 
-        <!-- Month -->
+            console.error(expenseError);
 
-        <div class="add-box">
+            alert(
+                "Unable to load expenses."
+            );
 
-            <div class="form-row">
+            return;
 
-                <label>
-                    Month:
-                    <input
-                        type="month"
-                        id="jebiMonth"
-                        onchange="loadExpenseScreen('jebi')"
-                    >
-                </label>
-
-            </div>
-
-        </div>
-
-
-        <!-- Budget -->
-
-        <div class="budget-box">
-
-            <h3>
-                Monthly Total Amount
-            </h3>
-
-            <div class="form-row">
-
-                <input
-                    type="number"
-                    id="jebiBudget"
-                    placeholder="Enter total amount"
-                    min="0"
-                    step="0.01"
-                >
-
-                <button
-                    class="add-btn"
-                    onclick="saveBudget('jebi')"
-                >
-                    Save / Edit Total Amount
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- Summary -->
-
-        <div class="summary-grid">
-
-            <div class="summary-card">
-
-                <h3>Total Amount</h3>
+        }
 
                 <div
                     class="amount"
@@ -1058,200 +1430,176 @@
                     ₹0.00
                 </div>
 
-            </div>
+        currentExpenses =
+            expenseData || [];
 
 
-            <div class="summary-card">
+        renderExpenseTable();
 
-                <h3>Total Spent</h3>
-
-                <div
-                    class="amount"
-                    id="jebiTotalSpent"
-                >
-                    ₹0.00
-                </div>
-
-            </div>
+        updateSummary();
 
 
-            <div class="summary-card">
-
-                <h3>Current Balance</h3>
-
-                <div
-                    class="amount"
-                    id="jebiBalance"
-                >
-                    ₹0.00
-                </div>
-
-            </div>
-
-        </div>
+        const budgetInput =
+            document.getElementById(
+                "budgetInput"
+            );
 
 
-        <!-- Add Expense -->
+        if (budgetInput) {
 
-        <div class="add-box">
+            budgetInput.value =
+                currentBudget || "";
 
-            <h3>
-                Add Expense
-            </h3>
+        }
 
-            <div class="form-row">
+    } catch (error) {
 
-                <input
-                    type="text"
-                    id="jebiItem"
-                    placeholder="Items"
-                >
+        console.error(error);
 
-                <input
-                    type="number"
-                    id="jebiCost"
-                    placeholder="Cost"
-                    min="0"
-                    step="0.01"
-                >
+        alert(
+            "Something went wrong while loading expenses."
+        );
 
-                <select id="jebiCategory">
+    }
 
-                    <option value="">
-                        Select Category
-                    </option>
+}
 
-                    <option value="Groceries">
-                        Groceries
-                    </option>
 
-                    <option value="Fuel">
-                        Fuel
-                    </option>
+/* =====================================================
+   SAVE / EDIT BUDGET
 
-                    <option value="Vegetables">
-                        Vegetables
-                    </option>
+async function saveBudget() {
 
-                    <option value="Fruits">
-                        Fruits
-                    </option>
+    const input =
+        document.getElementById(
+            "budgetInput"
+        );
 
-                    <option value="Dairy">
-                        Dairy
-                    </option>
+
+    const amount =
+        Number(input.value);
+
+
+    if (
+        isNaN(amount) ||
+        amount < 0
+    ) {
+
+        alert(
+            "Please enter a valid amount."
+        );
+
+        return;
+
+    }
 
                     <option value="Meat / Chicken / Fish">
                         Meat / Chicken / Fish
                     </option>
 
-                    <option value="Medical">
-                        Medical
-                    </option>
+    try {
 
-                    <option value="Household">
-                        Household
-                    </option>
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from("expense_budgets")
+            .upsert({
 
-                    <option value="Transport">
-                        Transport
-                    </option>
+                person: currentPerson,
 
-                    <option value="Food / Restaurant">
-                        Food / Restaurant
-                    </option>
+                month: currentMonth,
 
-                    <option value="Bills & Utilities">
-                        Bills & Utilities
-                    </option>
+                total_amount: amount
 
-                    <option value="Shopping">
-                        Shopping
-                    </option>
+            }, {
 
-                    <option value="Entertainment">
-                        Entertainment
-                    </option>
+                onConflict:
+                    "person,month"
 
-                    <option value="Others">
-                        Others
-                    </option>
-
-                </select>
-
-                <button
-                    class="add-btn"
-                    onclick="addExpense('jebi')"
-                >
-                    Add Expense
-                </button>
-
-            </div>
-
-            <p style="font-size:13px;color:#64748b;">
-                Date will automatically be today's date.
-            </p>
-
-        </div>
+            })
+            .select()
+            .single();
 
 
-        <!-- Expense Table -->
+        if (error) {
 
-        <div class="table-container">
+            console.error(error);
 
-            <table>
+            alert(
+                "Unable to save total amount."
+            );
 
-                <thead>
+            return;
 
-                    <tr>
+        }
 
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Items</th>
-                        <th>Category</th>
-                        <th>Cost</th>
-                        <th>Current Balance</th>
-                        <th>Action</th>
 
-                    </tr>
+        currentBudget =
+            Number(
+                data.total_amount
+            );
+
+
+        updateSummary();
+
+
+        alert(
+            "Monthly Total Amount saved successfully."
+        );
+
+    } catch (error) {
+
+        console.error(error);
 
                 </thead>
 
-                <tbody id="jebiExpenseTable"></tbody>
-
-            </table>
-
-        </div>
-
-    </div>
+}
 
 
-    <!-- =====================================================
-         MONTHLY REPORTS
-    ====================================================== -->
+/* =====================================================
+   ADD EXPENSE
 
-    <div id="reports" class="tab-content">
+async function addExpense() {
 
-        <div class="section-title">
-            Monthly Reports
-        </div>
+    const itemInput =
+        document.getElementById(
+            "expenseItem"
+        );
 
-
-        <!-- FILTERS -->
-
-        <div class="report-filters">
-
-            <h3>
-                Expense Filters
-            </h3>
+    const costInput =
+        document.getElementById(
+            "expenseCost"
+        );
 
 
-            <div class="filter-grid">
+    const item =
+        itemInput.value.trim();
+
+    const cost =
+        Number(costInput.value);
 
 
-                <!-- PERSON -->
+    if (!item) {
 
-                <div class="filter-item">
+        alert(
+            "Please enter the item."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        isNaN(cost) ||
+        cost <= 0
+    ) {
+
+        alert(
+            "Please enter a valid cost."
+        );
 
                     <label>
                         Person
@@ -1263,183 +1611,149 @@
                             All
                         </option>
 
-                        <option value="abi">
-                            Abi
-                        </option>
+    try {
 
-                        <option value="jebi">
-                            JEBI
-                        </option>
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("expenses")
+            .insert({
 
-                    </select>
+                person: currentPerson,
 
-                </div>
+                item: item,
 
+                cost: cost,
 
-                <!-- MONTH -->
+                month: currentMonth
 
-                <div class="filter-item">
-
-                    <label>
-                        Month
-                    </label>
-
-                    <input
-                        type="month"
-                        id="reportMonth"
-                    >
-
-                </div>
+            });
 
 
-                <!-- CATEGORY -->
+        if (error) {
 
-                <div class="filter-item">
+            console.error(error);
+
+            alert(
+                "Unable to add expense."
+            );
+
+            return;
+
+        }
 
                     <label>
                         Category
                     </label>
 
-                    <select id="reportCategory">
+        itemInput.value = "";
 
-                        <option value="all">
-                            All Categories
-                        </option>
-
-                        <option value="Groceries">
-                            Groceries
-                        </option>
-
-                        <option value="Fuel">
-                            Fuel
-                        </option>
-
-                        <option value="Vegetables">
-                            Vegetables
-                        </option>
-
-                        <option value="Fruits">
-                            Fruits
-                        </option>
-
-                        <option value="Dairy">
-                            Dairy
-                        </option>
-
-                        <option value="Meat / Chicken / Fish">
-                            Meat / Chicken / Fish
-                        </option>
-
-                        <option value="Medical">
-                            Medical
-                        </option>
-
-                        <option value="Household">
-                            Household
-                        </option>
-
-                        <option value="Transport">
-                            Transport
-                        </option>
-
-                        <option value="Food / Restaurant">
-                            Food / Restaurant
-                        </option>
-
-                        <option value="Bills & Utilities">
-                            Bills & Utilities
-                        </option>
-
-                        <option value="Shopping">
-                            Shopping
-                        </option>
-
-                        <option value="Entertainment">
-                            Entertainment
-                        </option>
-
-                        <option value="Others">
-                            Others
-                        </option>
-
-                    </select>
-
-                </div>
+        costInput.value = "";
 
 
-                <!-- MIN PRICE -->
+        await loadExpenses();
 
-                <div class="filter-item">
+    } catch (error) {
 
-                    <label>
-                        Minimum Price
-                    </label>
+        console.error(error);
 
-                    <input
-                        type="number"
-                        id="reportMinPrice"
-                        placeholder="₹ Min"
-                        min="0"
-                        step="0.01"
-                    >
+    }
 
-                </div>
+}
 
 
-                <!-- MAX PRICE -->
+/* =====================================================
+   RENDER EXPENSE TABLE
 
-                <div class="filter-item">
+function renderExpenseTable() {
 
-                    <label>
-                        Maximum Price
-                    </label>
-
-                    <input
-                        type="number"
-                        id="reportMaxPrice"
-                        placeholder="₹ Max"
-                        min="0"
-                        step="0.01"
-                    >
-
-                </div>
+    const tbody =
+        document.getElementById(
+            "expenseTableBody"
+        );
 
 
-                <!-- DATE FROM -->
-
-                <div class="filter-item">
-
-                    <label>
-                        Date From
-                    </label>
-
-                    <input
-                        type="date"
-                        id="reportDateFrom"
-                    >
-
-                </div>
+    if (!tbody) return;
 
 
-                <!-- DATE TO -->
+    tbody.innerHTML = "";
 
-                <div class="filter-item">
 
-                    <label>
-                        Date To
-                    </label>
+    const totalSpent =
+        currentExpenses.reduce(
+            (sum, expense) =>
+                sum + Number(expense.cost),
+            0
+        );
 
-                    <input
-                        type="date"
-                        id="reportDateTo"
-                    >
 
-                </div>
+    const balance =
+        currentBudget - totalSpent;
+
+
+    currentExpenses.forEach(
+        (expense, index) => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${escapeHTML(expense.item)}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        expense.cost
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ₹${balance.toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="edit-btn"
+                        onclick="openExpenseEdit(${expense.id})">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteExpense(${expense.id})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        }
+    );
 
             </div>
 
+    if (
+        currentExpenses.length === 0
+    ) {
 
-            <div class="report-buttons">
+        tbody.innerHTML = `
 
                 <button
                     class="add-btn"
@@ -2534,90 +2848,6 @@ function renderExpenseTable(
             <tr>
 
                 <td
-                    colspan="7"
-                    style="text-align:center;"
-                >
-                    No expenses found for this month.
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    expenses.forEach(expense => {
-
-        const row =
-            document.createElement("tr");
-
-
-        const balanceClass =
-            balance >= 0
-                ? "balance-positive"
-                : "balance-negative";
-
-
-        row.innerHTML = `
-
-            <td>
-                ${expense.id}
-            </td>
-
-            <td>
-                ${formatDate(expense.expense_date)}
-            </td>
-
-            <td>
-                ${escapeHTML(expense.item)}
-            </td>
-
-            <td>
-                ${escapeHTML(expense.category)}
-            </td>
-
-            <td>
-                ${formatMoney(expense.cost)}
-            </td>
-
-            <td class="${balanceClass}">
-                ${formatMoney(balance)}
-            </td>
-
-            <td>
-
-                <button
-                    class="action-btn edit-btn"
-                    onclick='openEditExpense(${JSON.stringify(expense)})'
-                >
-                    Edit
-                </button>
-
-                <button
-                    class="action-btn delete-btn"
-                    onclick="deleteExpense(${expense.id}, '${person}')"
-                >
-                    Delete
-                </button>
-
-            </td>
-
-        `;
-
-
-        table.appendChild(row);
-
-    });
-
-}
-
-
-/* =========================================================
-   EDIT EXPENSE
-========================================================= */
 
 function openEditExpense(expense) {
 
@@ -2667,7 +2897,6 @@ function openEditExpense(expense) {
 
 /* =========================================================
    CLOSE EDIT MODAL
-========================================================= */
 
 function closeEditModal() {
 
@@ -2681,7 +2910,6 @@ function closeEditModal() {
 
 /* =========================================================
    UPDATE EXPENSE
-========================================================= */
 
 async function updateExpense() {
 
@@ -2817,7 +3045,6 @@ async function updateExpense() {
 
 /* =========================================================
    DELETE EXPENSE
-========================================================= */
 
 async function deleteExpense(
     id,
@@ -2867,7 +3094,6 @@ async function deleteExpense(
 
 /* =========================================================
    MONTHLY REPORT
-========================================================= */
 
 async function generateReport() {
 
@@ -2934,6 +3160,10 @@ async function generateReport() {
         alert(
             "Minimum price cannot be greater than maximum price."
         );
+                    colspan="5"
+                    style="padding:25px;color:#627d98;">
+
+                    No expenses added for this month.
 
         return;
 
@@ -2950,38 +3180,42 @@ async function generateReport() {
             "Date From cannot be after Date To."
         );
 
-        return;
-
     }
 
-
-    /* =========================
-       APPLY FILTERS
-    ========================= */
-
-    if (person !== "all") {
-
-        query =
-            query.eq(
-                "person",
-                person
-            );
-
-    }
+}
 
 
-    if (month) {
+/* =====================================================
+   UPDATE SUMMARY
 
-        query =
-            query.eq(
-                "month",
-                month
-            );
+function updateSummary() {
 
-    }
+    const totalSpent =
+        currentExpenses.reduce(
+            (sum, expense) =>
+                sum + Number(expense.cost),
+            0
+        );
 
 
-    if (category !== "all") {
+    const balance =
+        currentBudget - totalSpent;
+
+
+    const totalAmount =
+        document.getElementById(
+            "totalAmount"
+        );
+
+    const spent =
+        document.getElementById(
+            "totalSpent"
+        );
+
+    const currentBalance =
+        document.getElementById(
+            "currentBalance"
+        );
 
         query =
             query.eq(
@@ -2989,103 +3223,65 @@ async function generateReport() {
                 category
             );
 
-    }
+    if (totalAmount) {
 
-
-    if (minPrice !== "") {
-
-        query =
-            query.gte(
-                "cost",
-                Number(minPrice)
+        totalAmount.innerText =
+            formatCurrency(
+                currentBudget
             );
 
     }
 
 
-    if (maxPrice !== "") {
+    if (spent) {
 
-        query =
-            query.lte(
-                "cost",
-                Number(maxPrice)
+        spent.innerText =
+            formatCurrency(
+                totalSpent
             );
 
     }
 
 
-    if (dateFrom) {
+    if (currentBalance) {
 
-        query =
-            query.gte(
-                "expense_date",
-                dateFrom
+        currentBalance.innerText =
+            formatCurrency(
+                balance
             );
 
     }
 
 
-    if (dateTo) {
-
-        query =
-            query.lte(
-                "expense_date",
-                dateTo
-            );
-
-    }
-
-
-    query =
-        query
-            .order(
-                "expense_date",
-                {
-                    ascending: false
-                }
-            )
-            .order(
-                "id",
-                {
-                    ascending: false
-                }
-            );
-
-
-    const {
-        data,
-        error
-    } = await query;
-
-
-    if (error) {
-
-        console.error(error);
-
-        alert(
-            "Unable to generate report.\n\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    const expenses =
-        data || [];
-
-
-    renderReport(
-        expenses
-    );
+    renderExpenseTable();
 
 }
 
+    }
 
-/* =========================================================
-   RENDER REPORT
-========================================================= */
+/* =====================================================
+   OPEN EXPENSE EDIT
+
+function openExpenseEdit(id) {
+
+    const expense =
+        currentExpenses.find(
+            x => x.id === id
+        );
+
+
+    if (!expense) return;
+
+
+    editingExpenseId = id;
+
+
+    document.getElementById(
+        "editExpenseItem"
+    ).value = expense.item;
+
+    if (error) {
+
 
 function renderReport(expenses) {
 
@@ -3100,22 +3296,77 @@ function renderReport(expenses) {
 
     });
 
+    document.getElementById(
+        "editExpenseCost"
+    ).value = expense.cost;
+
+
+    document.getElementById(
+        "expenseModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =====================================================
+   CLOSE EXPENSE MODAL
+
+function closeExpenseModal() {
+
+    document.getElementById(
+        "expenseModal"
+    ).style.display = "none";
+
+
+    editingExpenseId = null;
+
+}
+
+
+/* =====================================================
+   SAVE EXPENSE EDIT
+
+async function saveExpenseEdit() {
+
+    if (!editingExpenseId) return;
+
+
+    const item =
+        document.getElementById(
+            "editExpenseItem"
+        ).value.trim();
+
+
+    const cost =
+        Number(
+            document.getElementById(
+                "editExpenseCost"
+            ).value
+        );
 
     document.getElementById(
         "reportTotal"
     ).innerText =
         formatMoney(total);
 
+    if (!item) {
 
-    document.getElementById(
-        "reportCount"
-    ).innerText =
-        expenses.length;
+        alert(
+            "Please enter the item."
+        );
+
+        return;
+
+    }
 
 
-    const table =
-        document.getElementById(
-            "reportTable"
+    if (
+        isNaN(cost) ||
+        cost <= 0
+    ) {
+
+        alert(
+            "Please enter a valid cost."
         );
 
 
@@ -3142,62 +3393,17 @@ function renderReport(expenses) {
     }
 
 
-    expenses.forEach(expense => {
+    try {
 
-        const row =
-            document.createElement("tr");
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("expenses")
+            .update({
 
+                item: item,
 
-        const personName =
-            expense.person === "abi"
-                ? "Abi"
-                : "JEBI";
-
-
-        row.innerHTML = `
-
-            <td>
-                ${expense.id}
-            </td>
-
-            <td>
-                ${formatDate(expense.expense_date)}
-            </td>
-
-            <td>
-                ${personName}
-            </td>
-
-            <td>
-                ${escapeHTML(expense.item)}
-            </td>
-
-            <td>
-                ${escapeHTML(expense.category)}
-            </td>
-
-            <td>
-                ${formatMoney(expense.cost)}
-            </td>
-
-        `;
-
-
-        table.appendChild(row);
-
-    });
-
-
-    renderCategorySummary(
-        expenses
-    );
-
-}
-
-
-/* =========================================================
-   CATEGORY SUMMARY
-========================================================= */
 
 function renderCategorySummary(
     expenses
@@ -3212,99 +3418,37 @@ function renderCategorySummary(
             expense.category ||
             "Others";
 
+                cost: cost
+
+            })
+            .eq(
+                "id",
+                editingExpenseId
+            );
 
         if (!summary[category]) {
 
-            summary[category] = {
+        if (error) {
 
-                count: 0,
+            console.error(error);
 
-                total: 0
+            alert(
+                "Unable to update expense."
+            );
 
-            };
+            return;
 
         }
 
 
-        summary[category].count++;
+        closeExpenseModal();
 
-        summary[category].total +=
-            Number(expense.cost);
+        await loadExpenses();
 
-    });
-
-
-    const table =
-        document.getElementById(
-            "categorySummaryTable"
-        );
-
-
-    table.innerHTML = "";
-
-
-    const categories =
-        Object.keys(summary)
-            .sort();
-
-
-    if (categories.length === 0) {
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="3"
-                    style="text-align:center;"
-                >
-                    No category data.
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    categories.forEach(category => {
-
-        const row =
-            document.createElement("tr");
-
+    } catch (error) {
 
         row.innerHTML = `
 
-            <td>
-                ${escapeHTML(category)}
-            </td>
-
-            <td>
-                ${summary[category].count}
-            </td>
-
-            <td>
-                ${formatMoney(
-                    summary[category].total
-                )}
-            </td>
-
-        `;
-
-
-        table.appendChild(row);
-
-    });
-
-}
-
-
-/* =========================================================
-   RESET REPORT
-========================================================= */
 
 function resetReport() {
 
@@ -3353,6 +3497,21 @@ function resetReport() {
     generateReport();
 
 }
+    }
+
+}
+
+
+/* =====================================================
+   DELETE EXPENSE
+
+async function deleteExpense(id) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this expense?"
+        )
+    ) {
 
 
 /* =========================================================
@@ -3392,25 +3551,17 @@ function formatDate(dateString) {
     }
 
 
-    const parts =
-        dateString.split("-");
+    try {
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("expenses")
+            .delete()
+            .eq("id", id);
 
 
-    if (parts.length !== 3) {
-
-        return dateString;
-
-    }
-
-
-    return `${parts[2]}-${parts[1]}-${parts[0]}`;
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
 
 function escapeHTML(value) {
 
@@ -3429,17 +3580,31 @@ function escapeHTML(value) {
         .replace(/</g, "&lt;")
 
         .replace(/>/g, "&gt;")
+        if (error) {
 
-        .replace(/"/g, "&quot;")
+            console.error(error);
 
-        .replace(/'/g, "&#039;");
+            alert(
+                "Unable to delete expense."
+            );
+
+            return;
+
+        }
+
+
+        await loadExpenses();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
+        .replace(/"/g, "&quot;")
 
-/* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-========================================================= */
 
 window.addEventListener(
     "click",
@@ -3449,21 +3614,40 @@ window.addEventListener(
             document.getElementById(
                 "editExpenseModal"
             );
+/* =====================================================
+   CURRENCY
+
+function formatCurrency(amount) {
+
+    return (
+        "₹" +
+        Number(amount)
+            .toLocaleString(
+                "en-IN",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            )
+    );
+
+}
 
 
-        if (event.target === modal) {
+/* =====================================================
+   ESCAPE HTML
 
-            closeEditModal();
+function escapeHTML(value) {
 
-        }
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-    }
-);
+}
 
-
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -3513,6 +3697,15 @@ document.addEventListener(
         await generateReport();
 
     }
+
+/* =====================================================
+   INITIAL LOAD
+
+showTab(
+    "tasks",
+    document.querySelector(
+        ".tab-button"
+    )
 );
 
 </script>
