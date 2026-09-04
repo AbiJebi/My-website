@@ -1,1037 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>JB World</title>
-
-<style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #222;
-}
-
-/* ================= HEADER ================= */
-
-.header {
-    background: #1e3a8a;
-    color: white;
-    padding: 18px 15px;
-    text-align: center;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 28px;
-}
-
-.header p {
-    margin: 5px 0 0;
-    font-size: 13px;
-    opacity: 0.9;
-}
-
-/* ================= TABS ================= */
-
-.tabs {
-    display: flex;
-    overflow-x: auto;
-    background: white;
-    border-bottom: 1px solid #ddd;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.tab-button {
-    border: none;
-    background: white;
-    padding: 14px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    white-space: nowrap;
-    color: #444;
-}
-
-.tab-button:hover {
-    background: #eef3ff;
-}
-
-.tab-button.active {
-    background: #2563eb;
-    color: white;
-}
-
-/* ================= CONTAINER ================= */
-
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.section-title {
-    font-size: 22px;
-    margin: 0 0 15px;
-    color: #1e3a8a;
-}
-
-/* ================= ADD BOX ================= */
-
-.add-box {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
-}
-
-.form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-input,
-select,
-button {
-    font-family: inherit;
-}
-
-input,
-select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    background: white;
-}
-
-.form-row input,
-.form-row select {
-    flex: 1;
-    min-width: 150px;
-}
-
-.add-btn {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.add-btn:hover {
-    background: #1d4ed8;
-}
-
-/* ================= TABLE ================= */
-
-.table-container {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 650px;
-}
-
-th {
-    background: #1e3a8a;
-    color: white;
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-}
-
-td {
-    padding: 11px;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-}
-
-tr:hover td {
-    background: #f8fafc;
-}
-
-/* ================= BUTTONS ================= */
-
-.action-btn {
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 2px;
-    font-size: 12px;
-}
-
-.edit-btn {
-    background: #f59e0b;
-    color: white;
-}
-
-.delete-btn {
-    background: #dc2626;
-    color: white;
-}
-
-.status-btn {
-    background: #16a34a;
-    color: white;
-}
-
-/* ================= EXPENSE ================= */
-
-.expense-top {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.expense-top label {
-    font-weight: bold;
-}
-
-.summary-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.summary-card {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    text-align: center;
-}
-
-.summary-card h3 {
-    margin: 0 0 8px;
-    font-size: 14px;
-    color: #555;
-}
-
-.summary-card p {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #1e3a8a;
-}
-
-/* ================= REPORT ================= */
-
-.report-filters {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
-}
-
-.report-filter-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.filter-item {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.filter-item label {
-    font-size: 13px;
-    font-weight: bold;
-    color: #444;
-}
-
-.report-buttons {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-.reset-btn {
-    background: #64748b;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.report-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.report-card {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    text-align: center;
-}
-
-.report-card h3 {
-    margin: 0 0 8px;
-    font-size: 14px;
-    color: #555;
-}
-
-.report-card p {
-    margin: 0;
-    font-size: 23px;
-    font-weight: bold;
-    color: #2563eb;
-}
-
-.category-summary {
-    margin-top: 20px;
-}
-
-/* ================= MODAL ================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-box {
-    background: white;
-    width: 100%;
-    max-width: 500px;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.modal-box h2 {
-    margin-top: 0;
-    color: #1e3a8a;
-}
-
-.modal-row {
-    margin-bottom: 12px;
-}
-
-.modal-row label {
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.modal-row input,
-.modal-row select {
-    width: 100%;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.close-btn {
-    background: #64748b;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 700px) {
-
-    .header h1 {
-        font-size: 24px;
-    }
-
-    .container {
-        padding: 12px;
-    }
-
-    .summary-grid,
-    .report-summary {
-        grid-template-columns: 1fr;
-    }
-
-    .report-filter-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-row {
-        flex-direction: column;
-    }
-
-    .form-row input,
-    .form-row select,
-    .add-btn {
-        width: 100%;
-    }
-
-    .section-title {
-        font-size: 20px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JB World</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        .header {
+            background: #1976d2;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 120px;
+            padding: 14px 10px;
+            border: none;
+            background: white;
+            color: #1976d2;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: #f0f7ff;
+        }
+
+        .tab-button.active {
+            color: white;
+            background: #1976d2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            background: white;
+            padding: 15px;
+            border-left: 5px solid #1976d2;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .add-box {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .add-box h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        input,
+        select {
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #1976d2;
+        }
+
+        .add-btn {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 5px;
+            background: #1976d2;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #125ca5;
+        }
+
+        .danger-btn {
+            background: #d32f2f;
+        }
+
+        .danger-btn:hover {
+            background: #a92323;
+        }
+
+        .edit-btn {
+            background: #f57c00;
+        }
+
+        .edit-btn:hover {
+            background: #d56600;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .summary-card h4 {
+            margin: 0 0 10px;
+            color: #666;
+        }
+
+        .summary-card .amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th {
+            background: #1976d2;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 11px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8fbff;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .small-btn {
+            border: none;
+            padding: 7px 10px;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .balance-positive {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .balance-negative {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .report-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .report-card {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .report-card h4 {
+            margin: 0 0 8px;
+            color: #666;
+        }
+
+        .report-card strong {
+            font-size: 23px;
+            color: #1976d2;
+        }
+
+        .empty-message {
+            padding: 25px;
+            text-align: center;
+            color: #777;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-item label {
+            font-weight: bold;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .filter-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .category-summary {
+            margin-top: 20px;
+        }
+
+        .month-selector {
+            margin-bottom: 15px;
+        }
+
+        .month-selector label {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .status-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+
+            .summary,
+            .report-summary,
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-button {
+                min-width: 50%;
+            }
+
+            .form-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-row input,
+            .form-row select,
+            .form-row button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <div class="header">
-    <h1>JB World</h1>
-    <p>Our Family Management</p>
+    JB World
 </div>
-
-<!-- ================= TABS ================= -->
 
 <div class="tabs">
 
-    <button class="tab-button active"
-            onclick="showTab('tasks', this)">
+    <button class="tab-button active" onclick="showTab('today', this)">
         Today's Task
     </button>
 
-    <button class="tab-button"
-            onclick="showTab('groceries', this)">
+    <button class="tab-button" onclick="showTab('groceries', this)">
         Groceries
     </button>
 
-    <button class="tab-button"
-            onclick="showTab('vegetables', this)">
+    <button class="tab-button" onclick="showTab('vegetables', this)">
         Vegetables
     </button>
 
-    <button class="tab-button"
-            onclick="showTab('todo', this)">
+    <button class="tab-button" onclick="showTab('todo', this)">
         To Do List
     </button>
 
-    <button class="tab-button"
-            onclick="showTab('abiExpense', this)">
+    <button class="tab-button" onclick="showTab('abiExpense', this)">
         Abi Expense
     </button>
 
-    <button class="tab-button"
-            onclick="showTab('jebiExpense', this)">
+    <button class="tab-button" onclick="showTab('jebiExpense', this)">
         JEBI Expense
     </button>
 
-    <button class="tab-button"
-            onclick="showTab('reports', this)">
+    <button class="tab-button" onclick="showTab('monthlyReports', this)">
         Monthly Reports
     </button>
 
 </div>
 
+
 <div class="container">
 
-<!-- ===================================================== -->
-<!-- TODAY'S TASK -->
-<!-- ===================================================== -->
 
-<div id="tasks" class="tab-content active">
+    <!-- ================= TODAY ================= -->
 
-    <h2 class="section-title">Today's Task</h2>
+    <div id="today" class="section active">
 
-    <div class="add-box">
-        <div class="form-row">
-            <input id="taskInput"
-                   type="text"
-                   placeholder="Enter task">
-
-            <input id="taskPerson"
-                   type="text"
-                   placeholder="Name">
-
-            <button class="add-btn"
-                    onclick="addNormalItem('tasks')">
-                Add
-            </button>
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="tasksTable"></tbody>
-        </table>
-    </div>
-
-</div>
-
-
-<!-- ===================================================== -->
-<!-- GROCERIES -->
-<!-- ===================================================== -->
-
-<div id="groceries" class="tab-content">
-
-    <h2 class="section-title">Groceries</h2>
-
-    <div class="add-box">
-        <div class="form-row">
-
-            <input id="groceryInput"
-                   type="text"
-                   placeholder="Item name">
-
-            <input id="groceryQty"
-                   type="text"
-                   placeholder="Quantity">
-
-            <button class="add-btn"
-                    onclick="addNormalItem('groceries')">
-                Add
-            </button>
-
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="groceriesTable"></tbody>
-        </table>
-    </div>
-
-</div>
-
-
-<!-- ===================================================== -->
-<!-- VEGETABLES -->
-<!-- ===================================================== -->
-
-<div id="vegetables" class="tab-content">
-
-    <h2 class="section-title">Vegetables</h2>
-
-    <div class="add-box">
-        <div class="form-row">
-
-            <input id="vegetableInput"
-                   type="text"
-                   placeholder="Vegetable name">
-
-            <input id="vegetableQty"
-                   type="text"
-                   placeholder="Quantity">
-
-            <button class="add-btn"
-                    onclick="addNormalItem('vegetables')">
-                Add
-            </button>
-
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>Vegetable</th>
-                    <th>Quantity</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="vegetablesTable"></tbody>
-        </table>
-    </div>
-
-</div>
-
-
-<!-- ===================================================== -->
-<!-- TODO -->
-<!-- ===================================================== -->
-
-<div id="todo" class="tab-content">
-
-    <h2 class="section-title">To Do List</h2>
-
-    <div class="add-box">
-        <div class="form-row">
-
-            <input id="todoInput"
-                   type="text"
-                   placeholder="Enter something to do">
-
-            <input id="todoPerson"
-                   type="text"
-                   placeholder="Name">
-
-            <button class="add-btn"
-                    onclick="addNormalItem('todo')">
-                Add
-            </button>
-
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="todoTable"></tbody>
-        </table>
-    </div>
-
-</div>
-
-
-<!-- ===================================================== -->
-<!-- ABI EXPENSE -->
-<!-- ===================================================== -->
-
-<div id="abiExpense" class="tab-content">
-
-    <h2 class="section-title">Abi Expense</h2>
-
-    <div class="expense-top">
-
-        <label>Month:</label>
-
-        <input type="month"
-               id="abiMonth"
-               onchange="loadExpenses('abi')">
-
-    </div>
-
-    <div class="summary-grid">
-
-        <div class="summary-card">
-            <h3>Total Amount</h3>
-            <p id="abiBudget">₹0.00</p>
+        <div class="section-title">
+            Today's Task
         </div>
 
-        <div class="summary-card">
-            <h3>Total Spent</h3>
-            <p id="abiSpent">₹0.00</p>
-        </div>
+        <div class="add-box">
 
-        <div class="summary-card">
-            <h3>Current Balance</h3>
-            <p id="abiBalance">₹0.00</p>
-        </div>
+            <h3>Add Task</h3>
 
-    </div>
+            <div class="form-row">
 
-    <div class="add-box">
+                <input
+                    type="text"
+                    id="todayTaskInput"
+                    placeholder="Enter task"
+                >
 
-        <h3>Add Expense</h3>
+                <button
+                    class="add-btn"
+                    onclick="addSimpleTask('today')">
+                    Add Task
+                </button>
 
-        <div class="form-row">
-
-            <input id="abiItem"
-                   type="text"
-                   placeholder="Items">
-
-            <input id="abiCost"
-                   type="number"
-                   step="0.01"
-                   placeholder="Cost">
-
-            <select id="abiCategory">
-                <option value="Groceries">Groceries</option>
-                <option value="Fuel">Fuel</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Meat / Chicken / Fish">
-                    Meat / Chicken / Fish
-                </option>
-                <option value="Medical">Medical</option>
-                <option value="Household">Household</option>
-                <option value="Transport">Transport</option>
-                <option value="Food / Restaurant">
-                    Food / Restaurant
-                </option>
-                <option value="Bills & Utilities">
-                    Bills & Utilities
-                </option>
-                <option value="Shopping">Shopping</option>
-                <option value="Entertainment">
-                    Entertainment
-                </option>
-                <option value="Others">Others</option>
-            </select>
-
-            <button class="add-btn"
-                    onclick="addExpense('abi')">
-                Add Expense
-            </button>
-
-        </div>
-
-        <p style="font-size:12px;color:#666;margin-bottom:0;">
-            Date will automatically be today's date.
-        </p>
-
-    </div>
-
-    <div class="table-container">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Items</th>
-                    <th>Category</th>
-                    <th>Cost</th>
-                    <th>Current Balance</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="abiExpenseTable"></tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-
-<!-- ===================================================== -->
-<!-- JEBI EXPENSE -->
-<!-- ===================================================== -->
-
-<div id="jebiExpense" class="tab-content">
-
-    <h2 class="section-title">JEBI Expense</h2>
-
-    <div class="expense-top">
-
-        <label>Month:</label>
-
-        <input type="month"
-               id="jebiMonth"
-               onchange="loadExpenses('jebi')">
-
-    </div>
-
-    <div class="summary-grid">
-
-        <div class="summary-card">
-            <h3>Total Amount</h3>
-            <p id="jebiBudget">₹0.00</p>
-        </div>
-
-        <div class="summary-card">
-            <h3>Total Spent</h3>
-            <p id="jebiSpent">₹0.00</p>
-        </div>
-
-        <div class="summary-card">
-            <h3>Current Balance</h3>
-            <p id="jebiBalance">₹0.00</p>
-        </div>
-
-    </div>
-
-    <div class="add-box">
-
-        <h3>Add Expense</h3>
-
-        <div class="form-row">
-
-            <input id="jebiItem"
-                   type="text"
-                   placeholder="Items">
-
-            <input id="jebiCost"
-                   type="number"
-                   step="0.01"
-                   placeholder="Cost">
-
-            <select id="jebiCategory">
-                <option value="Groceries">Groceries</option>
-                <option value="Fuel">Fuel</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Meat / Chicken / Fish">
-                    Meat / Chicken / Fish
-                </option>
-                <option value="Medical">Medical</option>
-                <option value="Household">Household</option>
-                <option value="Transport">Transport</option>
-                <option value="Food / Restaurant">
-                    Food / Restaurant
-                </option>
-                <option value="Bills & Utilities">
-                    Bills & Utilities
-                </option>
-                <option value="Shopping">Shopping</option>
-                <option value="Entertainment">
-                    Entertainment
-                </option>
-                <option value="Others">Others</option>
-            </select>
-
-            <button class="add-btn"
-                    onclick="addExpense('jebi')">
-                Add Expense
-            </button>
-
-        </div>
-
-        <p style="font-size:12px;color:#666;margin-bottom:0;">
-            Date will automatically be today's date.
-        </p>
-
-    </div>
-
-    <div class="table-container">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Items</th>
-                    <th>Category</th>
-                    <th>Cost</th>
-                    <th>Current Balance</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="jebiExpenseTable"></tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-
-<!-- ===================================================== -->
-<!-- MONTHLY REPORTS -->
-<!-- ===================================================== -->
-
-<div id="reports" class="tab-content">
-
-    <h2 class="section-title">Monthly Reports</h2>
-
-    <div class="report-filters">
-
-        <div class="report-filter-grid">
-
-            <div class="filter-item">
-                <label>Person</label>
-
-                <select id="reportPerson">
-                    <option value="">All</option>
-                    <option value="abi">Abi</option>
-                    <option value="jebi">JEBI</option>
-                </select>
-            </div>
-
-            <div class="filter-item">
-                <label>Month</label>
-
-                <input type="month"
-                       id="reportMonth">
-            </div>
-
-            <div class="filter-item">
-                <label>Category</label>
-
-                <select id="reportCategory">
-                    <option value="">All</option>
-                    <option value="Groceries">Groceries</option>
-                    <option value="Fuel">Fuel</option>
-                    <option value="Vegetables">Vegetables</option>
-                    <option value="Fruits">Fruits</option>
-                    <option value="Dairy">Dairy</option>
-                    <option value="Meat / Chicken / Fish">
-                        Meat / Chicken / Fish
-                    </option>
-                    <option value="Medical">Medical</option>
-                    <option value="Household">Household</option>
-                    <option value="Transport">Transport</option>
-                    <option value="Food / Restaurant">
-                        Food / Restaurant
-                    </option>
-                    <option value="Bills & Utilities">
-                        Bills & Utilities
-                    </option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Entertainment">
-                        Entertainment
-                    </option>
-                    <option value="Others">Others</option>
-                </select>
-            </div>
-
-            <div class="filter-item">
-                <label>Minimum Price</label>
-
-                <input type="number"
-                       id="reportMinPrice"
-                       step="0.01"
-                       placeholder="₹0">
-            </div>
-
-            <div class="filter-item">
-                <label>Maximum Price</label>
-
-                <input type="number"
-                       id="reportMaxPrice"
-                       step="0.01"
-                       placeholder="₹999999">
-            </div>
-
-            <div class="filter-item">
-                <label>Date From</label>
-
-                <input type="date"
-                       id="reportDateFrom">
-            </div>
-
-            <div class="filter-item">
-                <label>Date To</label>
-
-                <input type="date"
-                       id="reportDateTo">
             </div>
 
         </div>
-
-        <div class="report-buttons">
-
-            <button class="add-btn"
-                    onclick="loadReport()">
-                Apply Filters
-            </button>
-
-            <button class="reset-btn"
-                    onclick="resetReport()">
-                Reset
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="report-summary">
-
-        <div class="report-card">
-            <h3>Total Filtered Expenses</h3>
-            <p id="reportTotal">₹0.00</p>
-        </div>
-
-        <div class="report-card">
-            <h3>Number of Expenses</h3>
-            <p id="reportCount">0</p>
-        </div>
-
-        <div class="report-card">
-            <h3>Average Expense</h3>
-            <p id="reportAverage">₹0.00</p>
-        </div>
-
-    </div>
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Person</th>
-                    <th>Items</th>
-                    <th>Category</th>
-                    <th>Cost</th>
-                </tr>
-            </thead>
-
-            <tbody id="reportTable"></tbody>
-
-        </table>
-
-    </div>
-
-    <div class="category-summary">
-
-        <h3 class="section-title">
-            Category-wise Summary
-        </h3>
 
         <div class="table-container">
 
@@ -1039,13 +409,12 @@ tr:hover td {
 
                 <thead>
                     <tr>
-                        <th>Category</th>
-                        <th>No. of Expenses</th>
-                        <th>Total Amount</th>
+                        <th>Task</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
-                <tbody id="categorySummaryTable"></tbody>
+                <tbody id="todayTaskTable"></tbody>
 
             </table>
 
@@ -1053,95 +422,921 @@ tr:hover td {
 
     </div>
 
-</div>
 
-</div>
+    <!-- ================= GROCERIES ================= -->
 
+    <div id="groceries" class="section">
 
-<!-- ===================================================== -->
-<!-- EDIT EXPENSE MODAL -->
-<!-- ===================================================== -->
+        <div class="section-title">
+            Groceries
+        </div>
 
-<div id="editModal" class="modal">
+        <div class="add-box">
 
-    <div class="modal-box">
+            <h3>Add Grocery</h3>
 
-        <h2>Edit Expense</h2>
+            <div class="form-row">
 
-        <input type="hidden" id="editId">
+                <input
+                    type="text"
+                    id="groceryInput"
+                    placeholder="Example: Sugar, Salt, Wheat"
+                >
 
-        <div class="modal-row">
+                <button
+                    class="add-btn"
+                    onclick="addSimpleTask('groceries')">
+                    Add
+                </button>
 
-            <label>Date</label>
-
-            <input type="date"
-                   id="editDate">
+            </div>
 
         </div>
 
-        <div class="modal-row">
+        <div class="table-container">
 
-            <label>Items</label>
+            <table>
 
-            <input type="text"
-                   id="editItem">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-        </div>
+                <tbody id="groceryTable"></tbody>
 
-        <div class="modal-row">
-
-            <label>Category</label>
-
-            <select id="editCategory">
-
-                <option value="Groceries">Groceries</option>
-                <option value="Fuel">Fuel</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Meat / Chicken / Fish">
-                    Meat / Chicken / Fish
-                </option>
-                <option value="Medical">Medical</option>
-                <option value="Household">Household</option>
-                <option value="Transport">Transport</option>
-                <option value="Food / Restaurant">
-                    Food / Restaurant
-                </option>
-                <option value="Bills & Utilities">
-                    Bills & Utilities
-                </option>
-                <option value="Shopping">Shopping</option>
-                <option value="Entertainment">
-                    Entertainment
-                </option>
-                <option value="Others">Others</option>
-
-            </select>
+            </table>
 
         </div>
 
-        <div class="modal-row">
+    </div>
 
-            <label>Cost</label>
 
-            <input type="number"
-                   step="0.01"
-                   id="editCost">
+    <!-- ================= VEGETABLES ================= -->
+
+    <div id="vegetables" class="section">
+
+        <div class="section-title">
+            Vegetables
+        </div>
+
+        <div class="add-box">
+
+            <h3>Add Vegetable</h3>
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="vegetableInput"
+                    placeholder="Enter vegetable"
+                >
+
+                <button
+                    class="add-btn"
+                    onclick="addSimpleTask('vegetables')">
+                    Add
+                </button>
+
+            </div>
 
         </div>
 
-        <div class="modal-actions">
+        <div class="table-container">
 
-            <button class="add-btn"
-                    onclick="saveEditedExpense()">
-                Save
-            </button>
+            <table>
 
-            <button class="close-btn"
-                    onclick="closeEditModal()">
-                Cancel
-            </button>
+                <thead>
+                    <tr>
+                        <th>Vegetable</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="vegetableTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TODO ================= -->
+
+    <div id="todo" class="section">
+
+        <div class="section-title">
+            To Do List
+        </div>
+
+        <div class="add-box">
+
+            <h3>Add To Do</h3>
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="todoInput"
+                    placeholder="Enter task"
+                >
+
+                <button
+                    class="add-btn"
+                    onclick="addSimpleTask('todo')">
+                    Add
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="todoTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= ABI EXPENSE ================= -->
+
+    <div id="abiExpense" class="section">
+
+        <div class="section-title">
+            Abi Expense
+        </div>
+
+        <div class="add-box month-selector">
+
+            <label for="abiMonth">
+                Select Month:
+            </label>
+
+            <input
+                type="month"
+                id="abiMonth"
+                onchange="loadExpenses('abi')"
+            >
+
+        </div>
+
+
+        <!-- MONTHLY TOTAL AMOUNT -->
+
+        <div class="add-box">
+
+            <h3>
+                Monthly Total Amount
+            </h3>
+
+            <div class="form-row">
+
+                <input
+                    id="abiBudgetInput"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="Enter total amount"
+                >
+
+                <button
+                    class="add-btn"
+                    onclick="saveBudget('abi')">
+                    Set / Update Amount
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <h4>Total Amount</h4>
+
+                <div
+                    class="amount"
+                    id="abiTotalAmount">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h4>Total Spent</h4>
+
+                <div
+                    class="amount"
+                    id="abiTotalSpent">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h4>Current Balance</h4>
+
+                <div
+                    class="amount"
+                    id="abiCurrentBalance">
+                    ₹0.00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADD EXPENSE -->
+
+        <div class="add-box">
+
+            <h3>
+                Add Abi Expense
+            </h3>
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="abiItem"
+                    placeholder="Items"
+                >
+
+                <input
+                    type="number"
+                    id="abiCost"
+                    step="0.01"
+                    min="0"
+                    placeholder="Cost"
+                >
+
+                <select id="abiCategory">
+
+                    <option value="Groceries">
+                        Groceries
+                    </option>
+
+                    <option value="Fuel">
+                        Fuel
+                    </option>
+
+                    <option value="Vegetables">
+                        Vegetables
+                    </option>
+
+                    <option value="Fruits">
+                        Fruits
+                    </option>
+
+                    <option value="Dairy">
+                        Dairy
+                    </option>
+
+                    <option value="Meat / Chicken / Fish">
+                        Meat / Chicken / Fish
+                    </option>
+
+                    <option value="Medical">
+                        Medical
+                    </option>
+
+                    <option value="Household">
+                        Household
+                    </option>
+
+                    <option value="Transport">
+                        Transport
+                    </option>
+
+                    <option value="Food / Restaurant">
+                        Food / Restaurant
+                    </option>
+
+                    <option value="Bills & Utilities">
+                        Bills & Utilities
+                    </option>
+
+                    <option value="Shopping">
+                        Shopping
+                    </option>
+
+                    <option value="Entertainment">
+                        Entertainment
+                    </option>
+
+                    <option value="Others">
+                        Others
+                    </option>
+
+                </select>
+
+                <input
+                    type="date"
+                    id="abiExpenseDate"
+                >
+
+                <button
+                    class="add-btn"
+                    onclick="addExpense('abi')">
+                    Add Expense
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPENSE TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Category</th>
+                        <th>Cost</th>
+                        <th>Current Balance</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="abiExpenseTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JEBI EXPENSE ================= -->
+
+    <div id="jebiExpense" class="section">
+
+        <div class="section-title">
+            Jebi Expense
+        </div>
+
+        <div class="add-box month-selector">
+
+            <label for="jebiMonth">
+                Select Month:
+            </label>
+
+            <input
+                type="month"
+                id="jebiMonth"
+                onchange="loadExpenses('jebi')"
+            >
+
+        </div>
+
+
+        <!-- MONTHLY TOTAL AMOUNT -->
+
+        <div class="add-box">
+
+            <h3>
+                Monthly Total Amount
+            </h3>
+
+            <div class="form-row">
+
+                <input
+                    id="jebiBudgetInput"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="Enter total amount"
+                >
+
+                <button
+                    class="add-btn"
+                    onclick="saveBudget('jebi')">
+                    Set / Update Amount
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <h4>Total Amount</h4>
+
+                <div
+                    class="amount"
+                    id="jebiTotalAmount">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h4>Total Spent</h4>
+
+                <div
+                    class="amount"
+                    id="jebiTotalSpent">
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h4>Current Balance</h4>
+
+                <div
+                    class="amount"
+                    id="jebiCurrentBalance">
+                    ₹0.00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADD EXPENSE -->
+
+        <div class="add-box">
+
+            <h3>
+                Add Jebi Expense
+            </h3>
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="jebiItem"
+                    placeholder="Items"
+                >
+
+                <input
+                    type="number"
+                    id="jebiCost"
+                    step="0.01"
+                    min="0"
+                    placeholder="Cost"
+                >
+
+                <select id="jebiCategory">
+
+                    <option value="Groceries">
+                        Groceries
+                    </option>
+
+                    <option value="Fuel">
+                        Fuel
+                    </option>
+
+                    <option value="Vegetables">
+                        Vegetables
+                    </option>
+
+                    <option value="Fruits">
+                        Fruits
+                    </option>
+
+                    <option value="Dairy">
+                        Dairy
+                    </option>
+
+                    <option value="Meat / Chicken / Fish">
+                        Meat / Chicken / Fish
+                    </option>
+
+                    <option value="Medical">
+                        Medical
+                    </option>
+
+                    <option value="Household">
+                        Household
+                    </option>
+
+                    <option value="Transport">
+                        Transport
+                    </option>
+
+                    <option value="Food / Restaurant">
+                        Food / Restaurant
+                    </option>
+
+                    <option value="Bills & Utilities">
+                        Bills & Utilities
+                    </option>
+
+                    <option value="Shopping">
+                        Shopping
+                    </option>
+
+                    <option value="Entertainment">
+                        Entertainment
+                    </option>
+
+                    <option value="Others">
+                        Others
+                    </option>
+
+                </select>
+
+                <input
+                    type="date"
+                    id="jebiExpenseDate"
+                >
+
+                <button
+                    class="add-btn"
+                    onclick="addExpense('jebi')">
+                    Add Expense
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPENSE TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Category</th>
+                        <th>Cost</th>
+                        <th>Current Balance</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="jebiExpenseTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MONTHLY REPORTS ================= -->
+
+    <div id="monthlyReports" class="section">
+
+        <div class="section-title">
+            Monthly Reports
+        </div>
+
+
+        <div class="add-box">
+
+            <h3>
+                Filter Expenses
+            </h3>
+
+
+            <div class="filter-grid">
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Person
+                    </label>
+
+                    <select id="reportPerson">
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="abi">
+                            Abi
+                        </option>
+
+                        <option value="jebi">
+                            JEBI
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Month
+                    </label>
+
+                    <input
+                        type="month"
+                        id="reportMonth"
+                    >
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select id="reportCategory">
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="Groceries">
+                            Groceries
+                        </option>
+
+                        <option value="Fuel">
+                            Fuel
+                        </option>
+
+                        <option value="Vegetables">
+                            Vegetables
+                        </option>
+
+                        <option value="Fruits">
+                            Fruits
+                        </option>
+
+                        <option value="Dairy">
+                            Dairy
+                        </option>
+
+                        <option value="Meat / Chicken / Fish">
+                            Meat / Chicken / Fish
+                        </option>
+
+                        <option value="Medical">
+                            Medical
+                        </option>
+
+                        <option value="Household">
+                            Household
+                        </option>
+
+                        <option value="Transport">
+                            Transport
+                        </option>
+
+                        <option value="Food / Restaurant">
+                            Food / Restaurant
+                        </option>
+
+                        <option value="Bills & Utilities">
+                            Bills & Utilities
+                        </option>
+
+                        <option value="Shopping">
+                            Shopping
+                        </option>
+
+                        <option value="Entertainment">
+                            Entertainment
+                        </option>
+
+                        <option value="Others">
+                            Others
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Minimum Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="reportMinPrice"
+                        step="0.01"
+                        min="0"
+                        placeholder="Minimum"
+                    >
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Maximum Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="reportMaxPrice"
+                        step="0.01"
+                        min="0"
+                        placeholder="Maximum"
+                    >
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Date From
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reportDateFrom"
+                    >
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label>
+                        Date To
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reportDateTo"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-buttons">
+
+                <button
+                    class="add-btn"
+                    onclick="loadMonthlyReport()">
+                    Apply Filters
+                </button>
+
+                <button
+                    class="add-btn danger-btn"
+                    onclick="resetMonthlyReport()">
+                    Reset
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT SUMMARY -->
+
+        <div class="report-summary">
+
+            <div class="report-card">
+
+                <h4>
+                    Total Filtered Expenses
+                </h4>
+
+                <strong id="reportTotal">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <h4>
+                    Number of Expenses
+                </h4>
+
+                <strong id="reportCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <h4>
+                    Average Expense
+                </h4>
+
+                <strong id="reportAverage">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Person</th>
+                        <th>Items</th>
+                        <th>Category</th>
+                        <th>Cost</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="monthlyReportTable"></tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- CATEGORY SUMMARY -->
+
+        <div class="category-summary">
+
+            <div class="section-title">
+                Category-wise Summary
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Category</th>
+                            <th>No. of Expenses</th>
+                            <th>Total Amount</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="categorySummaryTable"></tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
@@ -1150,26 +1345,16 @@ tr:hover td {
 </div>
 
 
-<!-- ===================================================== -->
-<!-- SUPABASE -->
-<!-- ===================================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-/* =====================================================
+
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
     "https://zuokrmjppxnlcmumeamq.supabase.co";
 
-/*
-   IMPORTANT:
-   Paste your existing Supabase PUBLISHABLE KEY here.
-   Do NOT use service_role / secret key.
-*/
 const SUPABASE_KEY =
     "sb_publishable_pZJjNN3iLCqWTxunDCKsvQ_WEphdmiZ";
 
@@ -1180,19 +1365,20 @@ const supabaseClient =
     );
 
 
-/* =====================================================
+/* =========================================================
    DATE HELPERS
-===================================================== */
+========================================================= */
 
 function getToday() {
 
     const d = new Date();
 
-    return d.getFullYear() +
-        "-" +
-        String(d.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(d.getDate()).padStart(2, "0");
+    return `${d.getFullYear()}-${String(
+        d.getMonth() + 1
+    ).padStart(2, '0')}-${String(
+        d.getDate()
+    ).padStart(2, '0')}`;
+
 }
 
 
@@ -1200,23 +1386,25 @@ function getCurrentMonth() {
 
     const d = new Date();
 
-    return d.getFullYear() +
-        "-" +
-        String(d.getMonth() + 1).padStart(2, "0");
+    return `${d.getFullYear()}-${String(
+        d.getMonth() + 1
+    ).padStart(2, '0')}`;
+
 }
 
 
-/* =====================================================
-   TAB
-===================================================== */
+/* =========================================================
+   TAB CONTROL
+========================================================= */
 
 function showTab(tabId, button) {
 
     document
-        .querySelectorAll(".tab-content")
-        .forEach(tab => {
-            tab.classList.remove("active");
+        .querySelectorAll(".section")
+        .forEach(section => {
+            section.classList.remove("active");
         });
+
 
     document
         .querySelectorAll(".tab-button")
@@ -1224,482 +1412,65 @@ function showTab(tabId, button) {
             btn.classList.remove("active");
         });
 
+
     document
         .getElementById(tabId)
         .classList.add("active");
 
+
     button.classList.add("active");
 
+
     if (tabId === "abiExpense") {
+
         loadExpenses("abi");
+
     }
+
 
     if (tabId === "jebiExpense") {
+
         loadExpenses("jebi");
+
     }
 
-    if (tabId === "reports") {
-        loadReport();
+
+    if (tabId === "monthlyReports") {
+
+        loadMonthlyReport();
+
     }
+
 }
 
 
-/* =====================================================
-   LOCAL STORAGE NORMAL LISTS
-===================================================== */
+/* =========================================================
+   EXPENSE CATEGORY
+========================================================= */
 
-const storageKeys = [
-    "tasks",
-    "groceries",
-    "vegetables",
-    "todo"
+const categories = [
+
+    "Groceries",
+    "Fuel",
+    "Vegetables",
+    "Fruits",
+    "Dairy",
+    "Meat / Chicken / Fish",
+    "Medical",
+    "Household",
+    "Transport",
+    "Food / Restaurant",
+    "Bills & Utilities",
+    "Shopping",
+    "Entertainment",
+    "Others"
+
 ];
 
 
-function getNormalData(type) {
-
-    return JSON.parse(
-        localStorage.getItem(type) || "[]"
-    );
-}
-
-
-function saveNormalData(type, data) {
-
-    localStorage.setItem(
-        type,
-        JSON.stringify(data)
-    );
-}
-
-
-function addNormalItem(type) {
-
-    let data = getNormalData(type);
-
-    let item = null;
-
-    if (type === "tasks") {
-
-        const description =
-            document.getElementById("taskInput").value.trim();
-
-        const person =
-            document.getElementById("taskPerson").value.trim();
-
-        if (!description) return;
-
-        item = {
-            person,
-            description,
-            status: "Pending"
-        };
-
-        document.getElementById("taskInput").value = "";
-        document.getElementById("taskPerson").value = "";
-    }
-
-    if (type === "groceries") {
-
-        const name =
-            document.getElementById("groceryInput").value.trim();
-
-        const qty =
-            document.getElementById("groceryQty").value.trim();
-
-        if (!name) return;
-
-        item = {
-            name,
-            qty,
-            status: "Pending"
-        };
-
-        document.getElementById("groceryInput").value = "";
-        document.getElementById("groceryQty").value = "";
-    }
-
-    if (type === "vegetables") {
-
-        const name =
-            document.getElementById("vegetableInput").value.trim();
-
-        const qty =
-            document.getElementById("vegetableQty").value.trim();
-
-        if (!name) return;
-
-        item = {
-            name,
-            qty,
-            status: "Pending"
-        };
-
-        document.getElementById("vegetableInput").value = "";
-        document.getElementById("vegetableQty").value = "";
-    }
-
-    if (type === "todo") {
-
-        const description =
-            document.getElementById("todoInput").value.trim();
-
-        const person =
-            document.getElementById("todoPerson").value.trim();
-
-        if (!description) return;
-
-        item = {
-            person,
-            description,
-            status: "Pending"
-        };
-
-        document.getElementById("todoInput").value = "";
-        document.getElementById("todoPerson").value = "";
-    }
-
-    data.push(item);
-
-    saveNormalData(type, data);
-
-    renderNormalTable(type);
-}
-
-
-function renderNormalTable(type) {
-
-    const data = getNormalData(type);
-
-    const table =
-        document.getElementById(type + "Table");
-
-    table.innerHTML = "";
-
-    data.forEach((item, index) => {
-
-        let row = "";
-
-        if (type === "tasks" || type === "todo") {
-
-            row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${escapeHTML(item.person)}</td>
-                    <td>${escapeHTML(item.description)}</td>
-                    <td>${escapeHTML(item.status)}</td>
-                    <td>
-                        <button class="action-btn status-btn"
-                            onclick="toggleNormalStatus('${type}', ${index})">
-                            Status
-                        </button>
-
-                        <button class="action-btn delete-btn"
-                            onclick="deleteNormalItem('${type}', ${index})">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            `;
-        }
-
-        if (type === "groceries" || type === "vegetables") {
-
-            row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${escapeHTML(item.name)}</td>
-                    <td>${escapeHTML(item.qty)}</td>
-                    <td>${escapeHTML(item.status)}</td>
-                    <td>
-                        <button class="action-btn status-btn"
-                            onclick="toggleNormalStatus('${type}', ${index})">
-                            Status
-                        </button>
-
-                        <button class="action-btn delete-btn"
-                            onclick="deleteNormalItem('${type}', ${index})">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            `;
-        }
-
-        table.innerHTML += row;
-    });
-}
-
-
-function toggleNormalStatus(type, index) {
-
-    const data = getNormalData(type);
-
-    data[index].status =
-        data[index].status === "Completed"
-            ? "Pending"
-            : "Completed";
-
-    saveNormalData(type, data);
-
-    renderNormalTable(type);
-}
-
-
-function deleteNormalItem(type, index) {
-
-    if (!confirm("Delete this item?")) return;
-
-    const data = getNormalData(type);
-
-    data.splice(index, 1);
-
-    saveNormalData(type, data);
-
-    renderNormalTable(type);
-}
-
-
-/* =====================================================
-   EXPENSE MONTH
-===================================================== */
-
-function setExpenseMonths() {
-
-    const month = getCurrentMonth();
-
-    document.getElementById("abiMonth").value = month;
-    document.getElementById("jebiMonth").value = month;
-
-    document.getElementById("reportMonth").value = month;
-}
-
-
-/* =====================================================
-   ADD EXPENSE
-===================================================== */
-
-async function addExpense(person) {
-
-    const item =
-        document.getElementById(
-            person + "Item"
-        ).value.trim();
-
-    const cost =
-        parseFloat(
-            document.getElementById(
-                person + "Cost"
-            ).value
-        );
-
-    const category =
-        document.getElementById(
-            person + "Category"
-        ).value;
-
-    if (!item) {
-
-        alert("Please enter item.");
-
-        return;
-    }
-
-    if (!cost || cost <= 0) {
-
-        alert("Please enter valid cost.");
-
-        return;
-    }
-
-    const expenseDate = getToday();
-
-    const month =
-        expenseDate.substring(0, 7);
-
-    const { error } =
-        await supabaseClient
-            .from("expenses")
-            .insert([{
-                person: person,
-                item: item,
-                cost: cost,
-                month: month,
-                expense_date: expenseDate,
-                category: category
-            }]);
-
-    if (error) {
-
-        console.error(error);
-
-        alert(
-            "Error adding expense:\n" +
-            error.message
-        );
-
-        return;
-    }
-
-    document.getElementById(
-        person + "Item"
-    ).value = "";
-
-    document.getElementById(
-        person + "Cost"
-    ).value = "";
-
-    await loadExpenses(person);
-}
-
-
-/* =====================================================
-   LOAD EXPENSES
-===================================================== */
-
-async function loadExpenses(person) {
-
-    const month =
-        document.getElementById(
-            person + "Month"
-        ).value || getCurrentMonth();
-
-    const table =
-        document.getElementById(
-            person + "ExpenseTable"
-        );
-
-    table.innerHTML =
-        `<tr><td colspan="7">Loading...</td></tr>`;
-
-    const { data, error } =
-        await supabaseClient
-            .from("expenses")
-            .select("*")
-            .eq("person", person)
-            .eq("month", month)
-            .order("expense_date", {
-                ascending: false
-            })
-            .order("id", {
-                ascending: false
-            });
-
-    if (error) {
-
-        console.error(error);
-
-        table.innerHTML =
-            `<tr>
-                <td colspan="7">
-                    ${escapeHTML(error.message)}
-                </td>
-            </tr>`;
-
-        return;
-    }
-
-    const spent =
-        (data || []).reduce(
-            (sum, e) =>
-                sum + Number(e.cost || 0),
-            0
-        );
-
-    const budget =
-        await getBudget(person, month);
-
-    const balance =
-        budget - spent;
-
-    document.getElementById(
-        person + "Budget"
-    ).textContent =
-        money(budget);
-
-    document.getElementById(
-        person + "Spent"
-    ).textContent =
-        money(spent);
-
-    document.getElementById(
-        person + "Balance"
-    ).textContent =
-        money(balance);
-
-    table.innerHTML = "";
-
-    if (!data || data.length === 0) {
-
-        table.innerHTML =
-            `<tr>
-                <td colspan="7">
-                    No expenses found.
-                </td>
-            </tr>`;
-
-        return;
-    }
-
-    data.forEach(expense => {
-
-        table.innerHTML += `
-
-            <tr>
-
-                <td>${expense.id}</td>
-
-                <td>
-                    ${expense.expense_date || "-"}
-                </td>
-
-                <td>
-                    ${escapeHTML(expense.item || "")}
-                </td>
-
-                <td>
-                    ${escapeHTML(expense.category || "Others")}
-                </td>
-
-                <td>
-                    ${money(Number(expense.cost || 0))}
-                </td>
-
-                <td>
-                    ${money(balance)}
-                </td>
-
-                <td>
-
-                    <button
-                        class="action-btn edit-btn"
-                        onclick="openEditExpense(
-                            ${expense.id},
-                            '${person}'
-                        )">
-                        Edit
-                    </button>
-
-                    <button
-                        class="action-btn delete-btn"
-                        onclick="deleteExpense(
-                            ${expense.id},
-                            '${person}'
-                        )">
-                        Delete
-                    </button>
-
-                </td>
-
-            </tr>
-        `;
-    });
-}
-
-
-/* =====================================================
+/* =========================================================
    GET BUDGET
-===================================================== */
+========================================================= */
 
 async function getBudget(person, month) {
 
@@ -1711,28 +1482,639 @@ async function getBudget(person, month) {
             .eq("month", month)
             .maybeSingle();
 
+
     if (error) {
 
         console.error(error);
 
         return 0;
+
     }
+
 
     return Number(
         data?.total_amount || 0
     );
+
 }
 
 
-/* =====================================================
+/* =========================================================
+   SAVE / UPDATE MONTHLY BUDGET
+========================================================= */
+
+async function saveBudget(person) {
+
+    const input =
+        document.getElementById(
+            person + "BudgetInput"
+        );
+
+
+    const amount =
+        parseFloat(input.value);
+
+
+    if (
+        isNaN(amount) ||
+        amount < 0
+    ) {
+
+        alert(
+            "Please enter a valid amount."
+        );
+
+        return;
+
+    }
+
+
+    const month =
+        document.getElementById(
+            person + "Month"
+        ).value ||
+        getCurrentMonth();
+
+
+    const { error } =
+        await supabaseClient
+            .from("expense_budgets")
+            .upsert(
+                {
+                    person: person,
+                    month: month,
+                    total_amount: amount
+                },
+                {
+                    onConflict:
+                        "person,month"
+                }
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Error saving monthly amount:\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    input.value = "";
+
+
+    alert(
+        `${
+            person === "abi"
+                ? "Abi"
+                : "JEBI"
+        } monthly amount updated successfully!`
+    );
+
+
+    await loadExpenses(person);
+
+}
+
+
+/* =========================================================
+   LOAD EXPENSES
+========================================================= */
+
+async function loadExpenses(person) {
+
+    const monthInput =
+        document.getElementById(
+            person + "Month"
+        );
+
+
+    if (!monthInput.value) {
+
+        monthInput.value =
+            getCurrentMonth();
+
+    }
+
+
+    const month =
+        monthInput.value;
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("expenses")
+            .select(
+                "id, person, item, cost, month, expense_date, category"
+            )
+            .eq("person", person)
+            .eq("month", month)
+            .order(
+                "expense_date",
+                {
+                    ascending: false
+                }
+            )
+            .order(
+                "id",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Error loading expenses:\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    const budget =
+        await getBudget(
+            person,
+            month
+        );
+
+
+    document.getElementById(
+        person + "BudgetInput"
+    ).value = budget || "";
+
+
+    let totalSpent = 0;
+
+
+    data.forEach(expense => {
+
+        totalSpent +=
+            Number(expense.cost || 0);
+
+    });
+
+
+    const balance =
+        budget - totalSpent;
+
+
+    document.getElementById(
+        person + "TotalAmount"
+    ).textContent =
+        formatCurrency(budget);
+
+
+    document.getElementById(
+        person + "TotalSpent"
+    ).textContent =
+        formatCurrency(totalSpent);
+
+
+    const balanceElement =
+        document.getElementById(
+            person + "CurrentBalance"
+        );
+
+
+    balanceElement.textContent =
+        formatCurrency(balance);
+
+
+    balanceElement.className =
+        "amount " +
+        (
+            balance >= 0
+                ? "balance-positive"
+                : "balance-negative"
+        );
+
+
+    const table =
+        document.getElementById(
+            person + "ExpenseTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (!data || data.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="7"
+                    class="empty-message">
+                    No expenses found for this month.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    let runningBalance =
+        budget;
+
+
+    data
+        .slice()
+        .reverse()
+        .forEach(expense => {
+
+            runningBalance -=
+                Number(expense.cost || 0);
+
+        });
+
+
+    runningBalance = budget;
+
+
+    data.forEach(expense => {
+
+        runningBalance -=
+            Number(expense.cost || 0);
+
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${expense.id}
+            </td>
+
+            <td>
+                ${formatDate(
+                    expense.expense_date
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    expense.item
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    expense.category || "Others"
+                )}
+            </td>
+
+            <td>
+                ${formatCurrency(
+                    Number(expense.cost)
+                )}
+            </td>
+
+            <td class="${
+                runningBalance >= 0
+                    ? "balance-positive"
+                    : "balance-negative"
+            }">
+                ${formatCurrency(
+                    runningBalance
+                )}
+            </td>
+
+            <td>
+
+                <div class="action-buttons">
+
+                    <button
+                        class="small-btn edit-btn"
+                        onclick="editExpense(
+                            ${expense.id},
+                            '${person}'
+                        )">
+                        Edit
+                    </button>
+
+                    <button
+                        class="small-btn danger-btn"
+                        onclick="deleteExpense(
+                            ${expense.id},
+                            '${person}'
+                        )">
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+/* =========================================================
+   ADD EXPENSE
+========================================================= */
+
+async function addExpense(person) {
+
+    const item =
+        document.getElementById(
+            person + "Item"
+        ).value.trim();
+
+
+    const cost =
+        parseFloat(
+            document.getElementById(
+                person + "Cost"
+            ).value
+        );
+
+
+    const category =
+        document.getElementById(
+            person + "Category"
+        ).value;
+
+
+    const expenseDate =
+        document.getElementById(
+            person + "ExpenseDate"
+        ).value ||
+        getToday();
+
+
+    if (!item) {
+
+        alert(
+            "Please enter the item."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        isNaN(cost) ||
+        cost < 0
+    ) {
+
+        alert(
+            "Please enter a valid cost."
+        );
+
+        return;
+
+    }
+
+
+    const month =
+        expenseDate.substring(
+            0,
+            7
+        );
+
+
+    const { error } =
+        await supabaseClient
+            .from("expenses")
+            .insert(
+                {
+                    person: person,
+                    item: item,
+                    cost: cost,
+                    month: month,
+                    expense_date:
+                        expenseDate,
+                    category:
+                        category
+                }
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Error adding expense:\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        person + "Item"
+    ).value = "";
+
+
+    document.getElementById(
+        person + "Cost"
+    ).value = "";
+
+
+    document.getElementById(
+        person + "Category"
+    ).value = "Groceries";
+
+
+    document.getElementById(
+        person + "ExpenseDate"
+    ).value = getToday();
+
+
+    document.getElementById(
+        person + "Month"
+    ).value = month;
+
+
+    await loadExpenses(person);
+
+}
+
+
+/* =========================================================
+   EDIT EXPENSE
+========================================================= */
+
+async function editExpense(id, person) {
+
+    const { data, error } =
+        await supabaseClient
+            .from("expenses")
+            .select(
+                "id,item,cost,expense_date,category"
+            )
+            .eq("id", id)
+            .single();
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Error loading expense:\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    const newItem =
+        prompt(
+            "Enter item:",
+            data.item
+        );
+
+
+    if (newItem === null) {
+        return;
+    }
+
+
+    const newCost =
+        prompt(
+            "Enter cost:",
+            data.cost
+        );
+
+
+    if (newCost === null) {
+        return;
+    }
+
+
+    const parsedCost =
+        parseFloat(newCost);
+
+
+    if (
+        isNaN(parsedCost) ||
+        parsedCost < 0
+    ) {
+
+        alert(
+            "Invalid cost."
+        );
+
+        return;
+
+    }
+
+
+    const newCategory =
+        prompt(
+            "Enter category:\n" +
+            categories.join(", "),
+            data.category || "Others"
+        );
+
+
+    if (newCategory === null) {
+        return;
+    }
+
+
+    const newDate =
+        prompt(
+            "Enter date (YYYY-MM-DD):",
+            data.expense_date ||
+            getToday()
+        );
+
+
+    if (newDate === null) {
+        return;
+    }
+
+
+    const newMonth =
+        newDate.substring(
+            0,
+            7
+        );
+
+
+    const { error: updateError } =
+        await supabaseClient
+            .from("expenses")
+            .update(
+                {
+                    item: newItem.trim(),
+                    cost: parsedCost,
+                    category:
+                        newCategory.trim() ||
+                        "Others",
+                    expense_date:
+                        newDate,
+                    month:
+                        newMonth
+                }
+            )
+            .eq("id", id);
+
+
+    if (updateError) {
+
+        console.error(updateError);
+
+        alert(
+            "Error updating expense:\n" +
+            updateError.message
+        );
+
+        return;
+
+    }
+
+
+    await loadExpenses(person);
+
+}
+
+
+/* =========================================================
    DELETE EXPENSE
-===================================================== */
+========================================================= */
 
 async function deleteExpense(id, person) {
 
-    if (!confirm("Delete this expense?")) {
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this expense?"
+        );
+
+
+    if (!confirmed) {
         return;
     }
+
 
     const { error } =
         await supabaseClient
@@ -1740,169 +2122,67 @@ async function deleteExpense(id, person) {
             .delete()
             .eq("id", id);
 
-    if (error) {
-
-        alert(error.message);
-
-        return;
-    }
-
-    loadExpenses(person);
-}
-
-
-/* =====================================================
-   EDIT EXPENSE
-===================================================== */
-
-async function openEditExpense(id, person) {
-
-    const { data, error } =
-        await supabaseClient
-            .from("expenses")
-            .select("*")
-            .eq("id", id)
-            .single();
 
     if (error) {
 
-        alert(error.message);
+        console.error(error);
 
-        return;
-    }
-
-    document.getElementById("editId").value =
-        data.id;
-
-    document.getElementById("editDate").value =
-        data.expense_date || getToday();
-
-    document.getElementById("editItem").value =
-        data.item || "";
-
-    document.getElementById("editCategory").value =
-        data.category || "Others";
-
-    document.getElementById("editCost").value =
-        data.cost || "";
-
-    document
-        .getElementById("editModal")
-        .classList.add("show");
-
-    window.editPerson = person;
-}
-
-
-async function saveEditedExpense() {
-
-    const id =
-        document.getElementById("editId").value;
-
-    const date =
-        document.getElementById("editDate").value;
-
-    const item =
-        document.getElementById("editItem").value.trim();
-
-    const category =
-        document.getElementById("editCategory").value;
-
-    const cost =
-        parseFloat(
-            document.getElementById("editCost").value
+        alert(
+            "Error deleting expense:\n" +
+            error.message
         );
 
-    if (!date || !item || !cost) {
-
-        alert("Please fill all fields.");
-
         return;
+
     }
 
-    const month =
-        date.substring(0, 7);
 
-    const { error } =
-        await supabaseClient
-            .from("expenses")
-            .update({
-                expense_date: date,
-                item: item,
-                category: category,
-                cost: cost,
-                month: month
-            })
-            .eq("id", id);
+    await loadExpenses(person);
 
-    if (error) {
-
-        alert(error.message);
-
-        return;
-    }
-
-    closeEditModal();
-
-    loadExpenses(window.editPerson);
-
-    loadReport();
 }
 
 
-function closeEditModal() {
-
-    document
-        .getElementById("editModal")
-        .classList.remove("show");
-}
-
-
-/* =====================================================
+/* =========================================================
    MONTHLY REPORT
-===================================================== */
+========================================================= */
 
-async function loadReport() {
-
-    const table =
-        document.getElementById("reportTable");
-
-    table.innerHTML =
-        `<tr>
-            <td colspan="6">
-                Loading...
-            </td>
-        </tr>`;
+async function loadMonthlyReport() {
 
     const person =
         document.getElementById(
             "reportPerson"
         ).value;
 
+
     const month =
         document.getElementById(
             "reportMonth"
         ).value;
+
 
     const category =
         document.getElementById(
             "reportCategory"
         ).value;
 
+
     const minPrice =
         document.getElementById(
             "reportMinPrice"
         ).value;
+
 
     const maxPrice =
         document.getElementById(
             "reportMaxPrice"
         ).value;
 
+
     const dateFrom =
         document.getElementById(
             "reportDateFrom"
         ).value;
+
 
     const dateTo =
         document.getElementById(
@@ -1911,9 +2191,10 @@ async function loadReport() {
 
 
     if (
-        minPrice &&
-        maxPrice &&
-        Number(minPrice) > Number(maxPrice)
+        minPrice !== "" &&
+        maxPrice !== "" &&
+        Number(minPrice) >
+            Number(maxPrice)
     ) {
 
         alert(
@@ -1921,6 +2202,7 @@ async function loadReport() {
         );
 
         return;
+
     }
 
 
@@ -1935,53 +2217,70 @@ async function loadReport() {
         );
 
         return;
+
     }
 
 
     let query =
         supabaseClient
             .from("expenses")
-            .select("*");
+            .select(
+                "id,person,item,cost,month,expense_date,category"
+            );
 
 
-    if (person) {
+    if (person !== "all") {
 
         query =
-            query.eq("person", person);
+            query.eq(
+                "person",
+                person
+            );
+
     }
 
 
     if (month) {
 
         query =
-            query.eq("month", month);
+            query.eq(
+                "month",
+                month
+            );
+
     }
 
 
-    if (category) {
+    if (category !== "all") {
 
         query =
-            query.eq("category", category);
+            query.eq(
+                "category",
+                category
+            );
+
     }
 
 
-    if (minPrice) {
+    if (minPrice !== "") {
 
         query =
             query.gte(
                 "cost",
                 Number(minPrice)
             );
+
     }
 
 
-    if (maxPrice) {
+    if (maxPrice !== "") {
 
         query =
             query.lte(
                 "cost",
                 Number(maxPrice)
             );
+
     }
 
 
@@ -1992,6 +2291,7 @@ async function loadReport() {
                 "expense_date",
                 dateFrom
             );
+
     }
 
 
@@ -2002,296 +2302,645 @@ async function loadReport() {
                 "expense_date",
                 dateTo
             );
+
     }
 
 
-    const { data, error } =
-        await query
-            .order("expense_date", {
+    const {
+        data,
+        error
+    } = await query
+        .order(
+            "expense_date",
+            {
                 ascending: false
-            })
-            .order("id", {
+            }
+        )
+        .order(
+            "id",
+            {
                 ascending: false
-            });
+            }
+        );
 
 
     if (error) {
 
         console.error(error);
 
-        table.innerHTML =
-            `<tr>
-                <td colspan="6">
-                    ${escapeHTML(error.message)}
-                </td>
-            </tr>`;
+        alert(
+            "Error loading report:\n" +
+            error.message
+        );
 
         return;
+
     }
 
 
-    const expenses =
-        data || [];
+    renderMonthlyReport(
+        data || []
+    );
+
+}
 
 
-    const total =
-        expenses.reduce(
-            (sum, e) =>
-                sum + Number(e.cost || 0),
-            0
+/* =========================================================
+   RENDER MONTHLY REPORT
+========================================================= */
+
+function renderMonthlyReport(data) {
+
+    const table =
+        document.getElementById(
+            "monthlyReportTable"
         );
 
 
-    const count =
-        expenses.length;
+    table.innerHTML = "";
+
+
+    let total = 0;
+
+
+    const categoryData = {};
+
+
+    data.forEach(expense => {
+
+        const cost =
+            Number(
+                expense.cost || 0
+            );
+
+
+        total += cost;
+
+
+        const cat =
+            expense.category ||
+            "Others";
+
+
+        if (!categoryData[cat]) {
+
+            categoryData[cat] = {
+                count: 0,
+                total: 0
+            };
+
+        }
+
+
+        categoryData[cat].count++;
+
+        categoryData[cat].total += cost;
+
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${expense.id}
+            </td>
+
+            <td>
+                ${formatDate(
+                    expense.expense_date
+                )}
+            </td>
+
+            <td>
+                ${
+                    expense.person === "abi"
+                        ? "Abi"
+                        : "JEBI"
+                }
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    expense.item
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    cat
+                )}
+            </td>
+
+            <td>
+                ${formatCurrency(cost)}
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+
+    if (data.length === 0) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="empty-message">
+
+                    No expenses found
+                    for the selected filters.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
 
 
     const average =
-        count > 0
-            ? total / count
+        data.length > 0
+            ? total / data.length
             : 0;
 
 
     document.getElementById(
         "reportTotal"
     ).textContent =
-        money(total);
+        formatCurrency(total);
 
 
     document.getElementById(
         "reportCount"
     ).textContent =
-        count;
+        data.length;
 
 
     document.getElementById(
         "reportAverage"
     ).textContent =
-        money(average);
+        formatCurrency(average);
 
 
-    table.innerHTML = "";
+    renderCategorySummary(
+        categoryData
+    );
 
-
-    if (count === 0) {
-
-        table.innerHTML =
-            `<tr>
-                <td colspan="6">
-                    No matching expenses found.
-                </td>
-            </tr>`;
-
-    } else {
-
-        expenses.forEach(expense => {
-
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>${expense.id}</td>
-
-                    <td>
-                        ${expense.expense_date || "-"}
-                    </td>
-
-                    <td>
-                        ${
-                            expense.person === "abi"
-                                ? "Abi"
-                                : "JEBI"
-                        }
-                    </td>
-
-                    <td>
-                        ${escapeHTML(expense.item || "")}
-                    </td>
-
-                    <td>
-                        ${escapeHTML(
-                            expense.category || "Others"
-                        )}
-                    </td>
-
-                    <td>
-                        ${money(
-                            Number(expense.cost || 0)
-                        )}
-                    </td>
-
-                </tr>
-
-            `;
-        });
-    }
-
-
-    renderCategorySummary(expenses);
 }
 
 
-/* =====================================================
+/* =========================================================
    CATEGORY SUMMARY
-===================================================== */
+========================================================= */
 
-function renderCategorySummary(expenses) {
+function renderCategorySummary(
+    categoryData
+) {
 
     const table =
         document.getElementById(
             "categorySummaryTable"
         );
 
+
     table.innerHTML = "";
 
-    const summary = {};
 
-    expenses.forEach(expense => {
-
-        const category =
-            expense.category || "Others";
-
-        if (!summary[category]) {
-
-            summary[category] = {
-                count: 0,
-                total: 0
-            };
-        }
-
-        summary[category].count++;
-
-        summary[category].total +=
-            Number(expense.cost || 0);
-    });
+    const categoriesList =
+        Object.keys(
+            categoryData
+        ).sort();
 
 
-    const categories =
-        Object.keys(summary)
-            .sort();
+    if (
+        categoriesList.length === 0
+    ) {
 
-
-    if (categories.length === 0) {
-
-        table.innerHTML =
-            `<tr>
-                <td colspan="3">
-                    No data
-                </td>
-            </tr>`;
-
-        return;
-    }
-
-
-    categories.forEach(category => {
-
-        table.innerHTML += `
+        table.innerHTML = `
 
             <tr>
 
-                <td>
-                    ${escapeHTML(category)}
-                </td>
+                <td
+                    colspan="3"
+                    class="empty-message">
 
-                <td>
-                    ${summary[category].count}
-                </td>
+                    No category data available.
 
-                <td>
-                    ${money(
-                        summary[category].total
-                    )}
                 </td>
 
             </tr>
 
         `;
+
+        return;
+
+    }
+
+
+    categoriesList.forEach(category => {
+
+        const item =
+            categoryData[category];
+
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${escapeHtml(category)}
+            </td>
+
+            <td>
+                ${item.count}
+            </td>
+
+            <td>
+                ${formatCurrency(
+                    item.total
+                )}
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
     });
+
 }
 
 
-/* =====================================================
+/* =========================================================
    RESET REPORT
-===================================================== */
+========================================================= */
 
-function resetReport() {
+function resetMonthlyReport() {
 
     document.getElementById(
         "reportPerson"
-    ).value = "";
+    ).value = "all";
+
 
     document.getElementById(
         "reportMonth"
     ).value = "";
 
+
     document.getElementById(
         "reportCategory"
-    ).value = "";
+    ).value = "all";
+
 
     document.getElementById(
         "reportMinPrice"
     ).value = "";
 
+
     document.getElementById(
         "reportMaxPrice"
     ).value = "";
+
 
     document.getElementById(
         "reportDateFrom"
     ).value = "";
 
+
     document.getElementById(
         "reportDateTo"
     ).value = "";
 
-    loadReport();
+
+    loadMonthlyReport();
+
 }
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* =========================================================
+   SIMPLE TASKS
+========================================================= */
 
-function money(value) {
+const simpleLists = {
 
-    return "₹" +
-        Number(value || 0)
-            .toLocaleString("en-IN", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+    today: [],
+
+    groceries: [],
+
+    vegetables: [],
+
+    todo: []
+
+};
+
+
+function addSimpleTask(type) {
+
+    let inputId;
+
+
+    if (type === "today") {
+
+        inputId =
+            "todayTaskInput";
+
+    }
+
+    else if (type === "groceries") {
+
+        inputId =
+            "groceryInput";
+
+    }
+
+    else if (type === "vegetables") {
+
+        inputId =
+            "vegetableInput";
+
+    }
+
+    else {
+
+        inputId =
+            "todoInput";
+
+    }
+
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+
+    const value =
+        input.value.trim();
+
+
+    if (!value) {
+
+        alert(
+            "Please enter something."
+        );
+
+        return;
+
+    }
+
+
+    simpleLists[type].push(
+        value
+    );
+
+
+    input.value = "";
+
+
+    renderSimpleList(type);
+
 }
 
 
-function escapeHTML(value) {
+function renderSimpleList(type) {
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    let tableId;
+
+
+    if (type === "today") {
+
+        tableId =
+            "todayTaskTable";
+
+    }
+
+    else if (type === "groceries") {
+
+        tableId =
+            "groceryTable";
+
+    }
+
+    else if (type === "vegetables") {
+
+        tableId =
+            "vegetableTable";
+
+    }
+
+    else {
+
+        tableId =
+            "todoTable";
+
+    }
+
+
+    const table =
+        document.getElementById(
+            tableId
+        );
+
+
+    table.innerHTML = "";
+
+
+    simpleLists[type].forEach(
+        (item, index) => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${escapeHtml(item)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="small-btn danger-btn"
+                        onclick="deleteSimpleTask(
+                            '${type}',
+                            ${index}
+                        )">
+                        Delete
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
 }
 
 
-/* =====================================================
+function deleteSimpleTask(
+    type,
+    index
+) {
+
+    simpleLists[type].splice(
+        index,
+        1
+    );
+
+
+    renderSimpleList(type);
+
+}
+
+
+/* =========================================================
+   FORMAT CURRENCY
+========================================================= */
+
+function formatCurrency(amount) {
+
+    return new Intl.NumberFormat(
+        "en-IN",
+        {
+            style: "currency",
+            currency: "INR",
+            minimumFractionDigits: 2
+        }
+    ).format(amount);
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+
+        return "-";
+
+    }
+
+
+    const parts =
+        dateString.split("-");
+
+
+    if (parts.length !== 3) {
+
+        return dateString;
+
+    }
+
+
+    return `${parts[2]}-${parts[1]}-${parts[0]}`;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
    INITIAL LOAD
-===================================================== */
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    function () {
 
-        setExpenseMonths();
+        const today =
+            getToday();
 
-        storageKeys.forEach(type => {
-            renderNormalTable(type);
-        });
+        const month =
+            getCurrentMonth();
+
+
+        document.getElementById(
+            "abiMonth"
+        ).value = month;
+
+
+        document.getElementById(
+            "jebiMonth"
+        ).value = month;
+
+
+        document.getElementById(
+            "abiExpenseDate"
+        ).value = today;
+
+
+        document.getElementById(
+            "jebiExpenseDate"
+        ).value = today;
+
+
+        document.getElementById(
+            "reportMonth"
+        ).value = month;
+
 
         loadExpenses("abi");
+
         loadExpenses("jebi");
-        loadReport();
+
+        loadMonthlyReport();
+
     }
 );
 
